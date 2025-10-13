@@ -62,4 +62,4 @@ spring:
 
   #runningtime environment
   profiles:
-    active:  dev
+    active:  prod
