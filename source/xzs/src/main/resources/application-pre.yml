@@ -1,5 +1,5 @@
 logging:
-  path: /usr/log/onlinejudge/
+  path: /usr/log/xzs/
   
 spring:
   datasource:
