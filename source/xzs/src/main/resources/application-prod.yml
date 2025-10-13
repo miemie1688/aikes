@@ -1,8 +1,8 @@
 logging:
-  path: /usr/log/xzs/
+  path: /usr/log/onlinejudge/
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/xzs
-    username: postgres
-    password: 123456
+    url: jdbc:postgresql://localhost:5432/onlinejudge
+    username: onlinejudge
+    password: onlinejudge
