@@ -18,7 +18,7 @@
 
 </div>
 
-# 学之思开源考试系统 - Postgresql版
+# 爱克斯开源考试系统 - Postgresql版
 
 ## 项目介绍
 
