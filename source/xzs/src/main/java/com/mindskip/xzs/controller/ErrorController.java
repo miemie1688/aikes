@@ -37,7 +37,6 @@ public class ErrorController extends BasicErrorController {
         return new ResponseEntity<>(error, HttpStatus.OK);
     }
 
-    @Override
     public String getErrorPath() {
         return PATH;
     }

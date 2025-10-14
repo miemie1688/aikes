@@ -1,8 +1,8 @@
 logging:
-  path: /usr/log/onlinejudge/
+  path: ./log/aikes/
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/onlinejudge
+    url: jdbc:postgresql://oj-postgres:5432/onlinejudge
     username: onlinejudge
     password: onlinejudge

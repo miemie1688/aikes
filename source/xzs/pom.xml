@@ -5,7 +5,7 @@
 
     <groupId>net.aikes</groupId>
     <artifactId>aikes</artifactId>
-    <version>3.9.0</version>
+    <version>3.9.1</version>
     <packaging>jar</packaging>
     <name>aikes</name>
     <url>https://www.mindskip.net/xzs.html</url>
