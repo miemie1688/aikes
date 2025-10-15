@@ -20,7 +20,7 @@ services:
       - POSTGRES_PASSWORD=onlinejudge
 
   oj-judge:
-    image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/python_edu/oj-backend:1.6.2
+    image: registry.cn-hongkong.aliyuncs.com/oj-image/judge:1.6.1
     container_name: oj-judge
     restart: always
     read_only: true
@@ -44,7 +44,7 @@ services:
       # - judger_debug=1
 
   oj-backend:
-    image: registry.cn-hongkong.aliyuncs.com/oj-image/backend:1.6.1
+    image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/python_edu/oj-backend:1.6.2
     container_name: oj-backend
     restart: always
     depends_on:
