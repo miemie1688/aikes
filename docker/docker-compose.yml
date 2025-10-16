@@ -82,5 +82,5 @@ services:
       ports:
           - "8888:8888"
       volumes:
-          - "./release:/usr/local/xzs/release/"
-          - "./log:/usr/log/xzs/"
+          - "./release:/usr/local/aikes/release/"
+          - "./log:/usr/log/aikes/"
