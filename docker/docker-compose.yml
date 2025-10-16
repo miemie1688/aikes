@@ -65,7 +65,7 @@ services:
       - "0.0.0.0:443:1443"
 
   java-edu:
-      image: java-edu:1.8.0
+      image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/java_edu/java_edu:3.9.1
       container_name: java-edu
       privileged: true
 #     network_mode: host
