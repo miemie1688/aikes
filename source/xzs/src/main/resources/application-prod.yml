@@ -6,3 +6,11 @@ spring:
     url: jdbc:postgresql://oj-postgres:5432/onlinejudge
     username: onlinejudge
     password: onlinejudge
+#logging:
+#  path: ./log/aikes/
+#
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/onlinejudge
+#    username: postgres
+#    password: 123456
