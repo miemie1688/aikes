@@ -78,7 +78,7 @@ services:
         - POSTGRES_PASSWORD=onlinejudge
         - DB_HOST=oj-postgres
       command:
-          /bin/bash -c "java -Duser.timezone=Asia/Shanghai -jar -Dspring.profiles.active=prod /app/xzs-3.9.2.jar"
+          /bin/bash -c "java -Duser.timezone=Asia/Shanghai -jar -Dspring.profiles.active=prod /app/aikes-3.9.2.jar"
       ports:
           - "8888:8888"
       volumes:
