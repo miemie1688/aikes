@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      title: '学之思管理系统'
+      title: '爱克斯科技'
     }
   }
 }

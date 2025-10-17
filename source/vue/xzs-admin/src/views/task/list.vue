@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParam" ref="queryForm" :inline="true">
-      <el-form-item label="年级：">
-        <el-select v-model="queryParam.gradeLevel" placeholder="年级" clearable>
+      <el-form-item label="阶段：">
+        <el-select v-model="queryParam.gradeLevel" placeholder="阶段" clearable>
           <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value"></el-option>
         </el-select>
       </el-form-item>
