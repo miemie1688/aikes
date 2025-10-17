@@ -65,7 +65,7 @@ services:
       - "0.0.0.0:443:1443"
 
   java-edu:
-      image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/java_edu/java_edu:3.9.2
+      image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/java_edu/java_edu:3.9.3
       container_name: java-edu
       privileged: true
 #     network_mode: host
@@ -78,7 +78,7 @@ services:
         - POSTGRES_PASSWORD=onlinejudge
         - DB_HOST=oj-postgres
       command:
-          /bin/bash -c "java -Duser.timezone=Asia/Shanghai -jar -Dspring.profiles.active=prod /app/aikes-3.9.2.jar"
+          /bin/bash -c "java -Duser.timezone=Asia/Shanghai -jar -Dspring.profiles.active=prod /app/aikes-3.9.3.jar"
       ports:
           - "8888:8888"
       volumes:
