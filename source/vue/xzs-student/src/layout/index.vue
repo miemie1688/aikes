@@ -1,25 +1,44 @@
 <template>
   <el-container class="full-height-container">
-    <el-header height="61px" class="student-header">
+    <el-header
+      height="80px"
+      class="student-header"
+    >
       <div class="header-content">
         <div>
-          <a href="/"><img src="@/assets/logo.png" height="50"/></a>
+          <a href="/"><img
+            src="@/assets/logo.png"
+            class="logo-img"
+          /></a>
         </div>
 
         <div class="head-user">
-          <el-dropdown trigger="click" placement="bottom">
-            <el-badge :is-dot="messageCount!==0" >
-              <el-avatar class="el-dropdown-avatar" size="medium" :src="userInfo.imagePath === null ? require('@/assets/avatar.png') : userInfo.imagePath"></el-avatar>
+          <el-dropdown
+            trigger="click"
+            placement="bottom"
+          >
+            <el-badge :is-dot="messageCount !== 0">
+              <el-avatar
+                class="el-dropdown-avatar"
+                size="medium"
+                :src="avatarPath"
+              ></el-avatar>
             </el-badge>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="$router.push({path:'/user/index'})">个人中心</el-dropdown-item>
-              <el-dropdown-item @click.native="$router.push({path:'/user/message'})">
-                <el-badge :value="messageCount" v-if="messageCount!==0">
+              <el-dropdown-item @click.native="$router.push({ path: '/user/index' })">个人中心</el-dropdown-item>
+              <el-dropdown-item @click.native="$router.push({ path: '/user/message' })">
+                <el-badge
+                  :value="messageCount"
+                  v-if="messageCount !== 0"
+                >
                   <span>消息中心</span>
                 </el-badge>
-                <span v-if="messageCount===0">消息中心</span>
+                <span v-if="messageCount === 0">消息中心</span>
               </el-dropdown-item>
-              <el-dropdown-item @click.native="logout" divided>退出</el-dropdown-item>
+              <el-dropdown-item
+                @click.native="logout"
+                divided
+              >退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -27,7 +46,10 @@
     </el-header>
 
     <el-container class="main-content-container">
-      <el-aside width="130px" class="student-aside">
+      <el-aside
+        width="130px"
+        class="student-aside"
+      >
         <el-menu
           class="el-menu-vertical"
           mode="vertical"
@@ -57,7 +79,7 @@
       </el-aside>
 
       <el-main class="student-main">
-        <router-view/>
+        <router-view />
       </el-main>
     </el-container>
 
@@ -82,46 +104,43 @@ export default {
     }
   },
   created () {
-    let _this = this
     // 确保在组件创建时设置正确的默认激活菜单项
     this.defaultUrl = this.routeSelect(this.$route.path)
     this.getUserMessageInfo()
     userApi.getCurrentUser().then(re => {
-      _this.userInfo = re.response
+      // 使用箭头函数以避免对 this 的额外引用 (_this)
+      this.userInfo = re.response
     })
   },
   watch: {
     // 监听路由变化，更新默认激活的菜单项
-    $route (to, from) {
+    $route (to) {
       this.defaultUrl = this.routeSelect(to.path)
     }
   },
   methods: {
     routeSelect (path) {
       // 路由选择逻辑：判断当前路径是否属于顶级菜单项，以便高亮显示
-      const topPaths = ['/index', '/paper/index', '/record/index', '/question/index']
-      
+      const topPaths = ['/index', '/paper/index', '/record/index', '/question/index', '/user/index'] // 增加了/user/index作为可高亮路径
       // 检查当前路径是否以任何一个顶级路径开头（处理子路由）
       for (const p of topPaths) {
-        if (path.startsWith(p) && path !== '/') { // '/' 通常应重定向到 '/index'
+        if (path.startsWith(p) && p !== '/index' && path !== '/') { // 修正逻辑，避免 /index/xxx 匹配到 /index
           return p
         }
       }
-      
-      // 特殊处理根路径
-      if (path === '/') {
-          return '/index'
+      // 特殊处理根路径或精确匹配 /index 的情况
+      if (path === '/' || path === '/index' || path.startsWith('/index/')) {
+        return '/index'
       }
 
-      // 如果没有匹配，则不激活任何菜单项（或返回一个默认值）
+      // 如果没有匹配，则不激活任何菜单项
       return null
     },
     logout () {
-      let _this = this
-      loginApi.logout().then(function (result) {
+      loginApi.logout().then((result) => { // 使用箭头函数
         if (result && result.code === 1) {
-          _this.clearLogin()
-          _this.$router.push({ path: '/login' })
+          this.clearLogin()
+          this.$router.push({ path: '/login' })
         }
       })
     },
@@ -131,7 +150,13 @@ export default {
   computed: {
     ...mapState('user', {
       messageCount: state => state.messageCount
-    })
+    }),
+    // 将图片路径 require 逻辑移到计算属性，保持模板简洁
+    avatarPath () {
+      return this.userInfo.imagePath === null
+        ? require('@/assets/avatar.png')
+        : this.userInfo.imagePath
+    }
   }
 }
 </script>
@@ -149,7 +174,7 @@ export default {
   padding: 0 20px;
   background-color: #fff;
   z-index: 100;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   flex-shrink: 0; /* 阻止头部被压缩 */
 }
 
@@ -157,17 +182,20 @@ export default {
   display: flex;
   justify-content: space-between; /* Logo 和用户信息在两端 */
   align-items: center;
-  height: 60px;
+  height: 79px; /* 2. 增加内容容器高度 */
 }
 
+.logo-img {
+  height: 60px; /* 3. 增加 Logo 图片高度 */
+  width: auto; /* 宽度按比例自适应 */
+  vertical-align: middle; /* 确保图片垂直居中对齐文本或父元素 */
+}
 .main-content-container {
   flex: 1; /* 核心：让这个容器占据剩余所有垂直空间 */
   overflow: hidden; /* 隐藏容器自身的溢出，由内部的 el-main 控制滚动 */
 }
 
 .student-aside {
-  // 设置侧边栏高度，确保它填满 main-content-container 的剩余高度
-  height: 66rem;
   overflow-y: auto; /* 如果侧边栏内容过多，允许垂直滚动 */
   background-color: #545c64; /* 使用菜单的背景色以保持一致性 */
   flex-shrink: 0; /* 阻止侧边栏被压缩 */

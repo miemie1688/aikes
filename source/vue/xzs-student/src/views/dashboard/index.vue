@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-container">
     <!-- 搜索框 -->
-    
 
     <!-- 顶部六张静态图片 -->
     <el-row class="top-image-row">
@@ -28,13 +27,14 @@
     </el-row>
 
     <!-- 任务中心 -->
-     <div class="search-bar">
+      <div class="search-bar">
       <el-input
         v-model="searchKeyword"
         placeholder="搜索任务或试卷"
         prefix-icon="el-icon-search"
         clearable
-        size="medium"
+        size="large"
+        class="custom-search-input"
       />
     </div>
     <el-row class="app-item-contain">
@@ -101,63 +101,84 @@
 
     <!-- 固定试卷 -->
     <el-row class="app-item-contain">
-      <h3 class="index-title-h3">固定试卷</h3>
-      <div style="padding-left: 15px">
-        <el-col
-          :span="4"
-          v-for="(item, index) in filteredFixedPaper"
-          :key="index"
-          :offset="index > 0 ? 1 : 0"
+  <h3 class="index-title-h3">固定试卷</h3>
+  <div style="padding-left: 15px">
+    <el-row :gutter="20">
+      <el-col
+        :span="4"
+        v-for="(item, index) in filteredFixedPaper"
+        :key="index"
+      >
+        <el-card
+          :body-style="{ padding: '0px' }"
+          v-loading="loading"
+          style="margin-bottom: 20px;"
         >
-          <el-card :body-style="{ padding: '0px' }" v-loading="loading">
-            <img src="@/assets/exam-paper/show1.png" class="image" />
-            <div style="padding: 14px;">
-              <span>{{ item.name }}</span>
-              <div class="bottom clearfix">
-                <router-link target="_blank" :to="{ path: '/do', query: { id: item.id } }">
-                  <el-button type="text" class="button">开始做题</el-button>
-                </router-link>
-              </div>
+          <img src="@/assets/exam-paper/show1.png" class="image" />
+          <div style="padding: 14px;">
+            <span>{{ item.name }}</span>
+            <div class="bottom clearfix">
+              <router-link
+                target="_blank"
+                :to="{ path: '/do', query: { id: item.id } }"
+              >
+                <el-button type="text" class="button">开始做题</el-button>
+              </router-link>
             </div>
-          </el-card>
-        </el-col>
-
-        <p v-if="filteredFixedPaper.length === 0" style="color:#999;">未找到匹配的固定试卷</p>
-      </div>
+          </div>
+        </el-card>
+      </el-col>
     </el-row>
+    <p v-if="filteredFixedPaper.length === 0" style="color:#999;">
+      未找到匹配的固定试卷
+    </p>
+  </div>
+</el-row>
 
-    <!-- 时段试卷 -->
-    <el-row class="app-item-contain">
-      <h3 class="index-title-h3" style="border-left: solid 10px rgb(220, 208, 65);">
-        时段试卷
-      </h3>
-      <div style="padding-left: 15px">
-        <el-col
-          :span="4"
-          v-for="(item, index) in filteredTimeLimitPaper"
-          :key="index"
-          :offset="index > 0 ? 1 : 0"
+<el-row class="app-item-contain">
+  <h3
+    class="index-title-h3"
+    style="border-left: solid 10px rgb(220, 208, 65);"
+  >
+    时段试卷
+  </h3>
+  <div style="padding-left: 15px">
+    <el-row :gutter="20">
+      <el-col
+        :span="4"
+        v-for="(item, index) in filteredTimeLimitPaper"
+        :key="index"
+      >
+        <el-card
+          :body-style="{ padding: '0px' }"
+          v-loading="loading"
+          style="margin-bottom: 20px;"
         >
-          <el-card :body-style="{ padding: '0px' }" v-loading="loading">
-            <img src="@/assets/exam-paper/show2.png" class="image" />
-            <div style="padding: 14px;">
-              <span>{{ item.name }}</span>
-              <p class="index-limit-paper-time">
-                <span>{{ item.startTime }}</span><br />
-                <span>{{ item.endTime }}</span>
-              </p>
-              <div class="bottom clearfix">
-                <router-link target="_blank" :to="{ path: '/do', query: { id: item.id } }">
-                  <el-button type="text" class="button">开始做题</el-button>
-                </router-link>
-              </div>
+          <img src="@/assets/exam-paper/show2.png" class="image" />
+          <div style="padding: 14px;">
+            <span>{{ item.name }}</span>
+            <p class="index-limit-paper-time">
+              <span>{{ item.startTime }}</span><br />
+              <span>{{ item.endTime }}</span>
+            </p>
+            <div class="bottom clearfix">
+              <router-link
+                target="_blank"
+                :to="{ path: '/do', query: { id: item.id } }"
+              >
+                <el-button type="text" class="button">开始做题</el-button>
+              </router-link>
             </div>
-          </el-card>
-        </el-col>
-
-        <p v-if="filteredTimeLimitPaper.length === 0" style="color:#999;">未找到匹配的时段试卷</p>
-      </div>
+          </div>
+        </el-card>
+      </el-col>
     </el-row>
+    <p v-if="filteredTimeLimitPaper.length === 0" style="color:#999;">
+      未找到匹配的时段试卷
+    </p>
+  </div>
+</el-row>
+
   </div>
 </template>
 
@@ -166,7 +187,7 @@ import { mapState, mapGetters } from 'vuex'
 import indexApi from '@/api/dashboard'
 
 export default {
-  data() {
+  data () {
     return {
       fixedPaper: [],
       timeLimitPaper: [],
@@ -177,7 +198,7 @@ export default {
       searchKeyword: '' // ✅ 搜索关键字
     }
   },
-  created() {
+  created () {
     this.loading = true
     indexApi.index().then((re) => {
       this.fixedPaper = re.response.fixedPaper
@@ -200,7 +221,7 @@ export default {
     }),
 
     // ✅ 过滤任务
-    filteredTaskList() {
+    filteredTaskList () {
       if (!this.searchKeyword.trim()) return this.taskList
       const kw = this.searchKeyword.trim().toLowerCase()
       return this.taskList.filter(
@@ -211,27 +232,27 @@ export default {
     },
 
     // ✅ 过滤固定试卷
-    filteredFixedPaper() {
+    filteredFixedPaper () {
       if (!this.searchKeyword.trim()) return this.fixedPaper
       const kw = this.searchKeyword.trim().toLowerCase()
       return this.fixedPaper.filter((p) => p.name.toLowerCase().includes(kw))
     },
 
     // ✅ 过滤时段试卷
-    filteredTimeLimitPaper() {
+    filteredTimeLimitPaper () {
       if (!this.searchKeyword.trim()) return this.timeLimitPaper
       const kw = this.searchKeyword.trim().toLowerCase()
       return this.timeLimitPaper.filter((p) => p.name.toLowerCase().includes(kw))
     }
   },
   methods: {
-    statusTagFormatter(status) {
+    statusTagFormatter (status) {
       return this.enumFormat(this.statusTag, status)
     },
-    statusTextFormatter(status) {
+    statusTextFormatter (status) {
       return this.enumFormat(this.statusEnum, status)
     },
-    matchesSearch(text) {
+    matchesSearch (text) {
       if (!this.searchKeyword.trim()) return true
       return text.toLowerCase().includes(this.searchKeyword.trim().toLowerCase())
     }
@@ -242,11 +263,35 @@ export default {
 <style lang="scss" scoped>
 /* 搜索框样式 */
 .search-bar {
-  width: 300px;
-  margin: 20px auto;   /* 上下 20px，左右自动居中 */
-  text-align: center;  /* 可选：让内部内容（比如输入框图标）更自然居中 */
+  margin: 30px 0; /* 增大上下外边距，让其更突出 */
+  display: flex;
+  justify-content: center; /* 搜索框水平居中 */
+  align-items: center;
 }
 
+/* 增强搜索框输入区域样式 */
+.custom-search-input {
+  width: 600px; /* 增大搜索框的宽度 */
+  max-width: 80%; /* 适配小屏幕时，最大宽度不超过父容器的 80% */
+
+  // 深度选择器用于修改 Element UI 内部样式
+  ::v-deep .el-input__inner {
+    border-radius: 25px; /* 增加圆角，更美观 */
+    padding-left: 40px !important; /* 确保前缀图标和文字有足够空间 */
+    border: 2px solid #409EFF; /* 增加显著的蓝色边框 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 添加明显阴影 */
+    transition: all 0.3s;
+    height: 50px !important; /* 增大高度 */
+    line-height: 50px !important;
+    font-size: 16px; /* 增大字体 */
+  }
+
+  ::v-deep .el-input__icon {
+    line-height: 50px; /* 确保图标垂直居中 */
+    font-size: 18px;
+    color: #409EFF;
+  }
+}
 
 /* 顶部图片区域 */
 .top-image-row {
