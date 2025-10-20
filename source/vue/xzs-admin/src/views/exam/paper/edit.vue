@@ -1,29 +1,46 @@
 <template>
+  
   <div class="app-container">
     <el-form :model="form" ref="form" label-width="100px" v-loading="formLoading" :rules="rules">
       <el-form-item label="阶段：" prop="level" required>
-        <el-select v-model="form.level" placeholder="阶段"  @change="levelChange">
+        <el-select v-model="form.level" placeholder="阶段" @change="levelChange">
           <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value"></el-option>
         </el-select>
       </el-form-item>
+
       <el-form-item label="学科：" prop="subjectId" required>
         <el-select v-model="form.subjectId" placeholder="学科">
           <el-option v-for="item in subjectFilter" :key="item.id" :value="item.id"
                      :label="item.name+' ( '+item.levelName+' )'"></el-option>
         </el-select>
       </el-form-item>
+
       <el-form-item label="试卷类型：" prop="paperType" required>
         <el-select v-model="form.paperType" placeholder="试卷类型">
           <el-option v-for="item in paperTypeEnum" :key="item.key" :value="item.key" :label="item.value"></el-option>
         </el-select>
       </el-form-item>
+
       <el-form-item label="时间限制：" required v-show="form.paperType===4">
         <el-date-picker v-model="form.limitDateTime" value-format="yyyy-MM-dd HH:mm:ss" type="datetimerange"
                         range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="试卷名称："  prop="name" required>
+
+      <el-form-item label="试卷名称：" prop="name" required>
         <el-input v-model="form.name"/>
+      </el-form-item>
+
+      <el-form-item label="试卷封面：" prop="coverPath" required>
+        <el-select v-model="form.coverPath" placeholder="选择预设封面">
+          <el-option v-for="item in coverEnum" :key="item.key" :value="item.value" :label="item.label">
+            {{ item.label }}
+          </el-option>
+        </el-select>
+        <div v-if="form.coverPath" style="margin-top: 10px;">
+          <span style="font-size: 14px; color: #606266;">封面预览:</span>
+          <img :src="form.coverPath" alt="封面预览" class="cover-preview-img"/>
+        </div>
       </el-form-item>
       <el-form-item :key="index" :label="'标题'+(index+1)+'：'" required v-for="(titleItem,index) in form.titleItems">
         <el-input v-model="titleItem.name" style="width: 80%"/>
@@ -46,19 +63,22 @@
           </el-form-item>
         </el-card>
       </el-form-item>
+
       <el-form-item label="建议时长：" prop="suggestTime" required>
         <el-input v-model="form.suggestTime" placeholder="分钟"/>
       </el-form-item>
+
       <el-form-item>
         <el-button type="primary" @click="submitForm">提交</el-button>
         <el-button @click="resetForm">重置</el-button>
         <el-button type="success" @click="addTitle">添加标题</el-button>
       </el-form-item>
     </el-form>
-    <el-dialog :visible.sync="questionPage.showDialog"  width="70%">
+
+    <el-dialog :visible.sync="questionPage.showDialog" width="70%">
       <el-form :model="questionPage.queryParam" ref="queryForm" :inline="true">
         <el-form-item label="ID：">
-          <el-input v-model="questionPage.queryParam.id"  clearable></el-input>
+          <el-input v-model="questionPage.queryParam.id" clearable></el-input>
         </el-form-item>
         <el-form-item label="题型：">
           <el-select v-model="questionPage.queryParam.questionType" clearable>
@@ -80,21 +100,23 @@
                   :page.sync="questionPage.queryParam.pageIndex" :limit.sync="questionPage.queryParam.pageSize"
                   @pagination="search"/>
       <span slot="footer" class="dialog-footer">
-          <el-button @click="questionPage.showDialog = false">取 消</el-button>
-          <el-button type="primary" @click="confirmQuestionSelect">确定</el-button>
-     </span>
+        <el-button @click="questionPage.showDialog = false">取 消</el-button>
+        <el-button type="primary" @click="confirmQuestionSelect">确定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-
 import { mapGetters, mapState, mapActions } from 'vuex'
 import Pagination from '@/components/Pagination'
 import QuestionShow from '../question/components/Show'
 import examPaperApi from '@/api/examPaper'
 import questionApi from '@/api/question'
-
+import coverPathApi from '@/api/admin/cover_path' // 🎯 导入封面路径API
+import img1 from '@/assets/img1.png'
+import img2 from '@/assets/img2.png'
+import img3 from '@/assets/img3.png'
 export default {
   components: { Pagination, QuestionShow },
   data () {
@@ -107,10 +129,17 @@ export default {
         limitDateTime: [],
         name: '',
         suggestTime: null,
-        titleItems: []
+        titleItems: [],
+        coverPath: '' // 🎯 新增封面路径字段
       },
       subjectFilter: null,
       formLoading: false,
+      // 🎯 封面选项的枚举数据
+      coverEnum: [
+        { key: 1, value: img1, label: '作文' },
+        { key: 2, value: img2, label: '英语' },
+        { key: 3, value: img3, label: '数学' }
+      ],
       rules: {
         level: [
           { required: true, message: '请选择阶段', trigger: 'change' }
@@ -126,6 +155,9 @@ export default {
         ],
         suggestTime: [
           { required: true, message: '请输入建议时长', trigger: 'blur' }
+        ],
+        coverPath: [ // 🎯 封面路径验证
+          { required: true, message: '请选择试卷封面', trigger: 'change' }
         ]
       },
       questionPage: {
@@ -155,6 +187,15 @@ export default {
       _this.formLoading = true
       examPaperApi.select(id).then(re => {
         _this.form = re.response
+        
+        // 🎯 步骤 1：获取试卷主体信息后，尝试获取封面路径
+        coverPathApi.getCoverPathById(id).then(coverRe => {
+          if (coverRe.code === 1 && coverRe.response) {
+            _this.form.coverPath = coverRe.response.coverPath
+          }
+        }).catch(() => {
+          // 忽略封面路径查询失败的错误，可能该试卷还没有封面记录
+        })
         _this.formLoading = false
       })
     }
@@ -165,12 +206,37 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.formLoading = true
+          
+          // 1. 调用试卷编辑/新增接口 (主流程)
           examPaperApi.edit(this.form).then(re => {
             if (re.code === 1) {
-              _this.$message.success(re.message)
-              _this.delCurrentView(_this).then(() => {
-                _this.$router.push('/exam/paper/list')
+              const examId = re.response.id || _this.form.id // 🎯 关键：获取新增/编辑后的试卷 ID
+
+              // 2. 调用封面路径接口 (辅助流程)
+              const coverData = {
+                examId: examId,
+                coverPath: _this.form.coverPath
+              }
+
+              // 判断当前操作是新增 (form.id 为空) 还是编辑 (form.id 存在)
+              const coverApiCall = _this.form.id ? coverPathApi.updateCoverPath : coverPathApi.addCoverPath;
+
+              coverApiCall(coverData).then(coverRe => {
+                  if (coverRe.code === 200) {
+                    _this.$message.success(`${re.message}，封面路径保存成功！`);
+                  } else {
+                    _this.$message.warning(`${re.message}，封面路径保存失败: ${coverRe.message}`);
+                  }
+              }).catch(coverError => {
+                  _this.$message.error(`${re.message}，但封面路径请求失败！`);
+                  // 即使封面保存失败，也继续主流程跳转，用户看到警告
+              }).finally(() => {
+                  // 3. 页面跳转
+                  _this.delCurrentView(_this).then(() => {
+                      _this.$router.push('/exam/paper/list')
+                  })
               })
+
             } else {
               _this.$message.error(re.message)
               this.formLoading = false
@@ -248,7 +314,8 @@ export default {
         limitDateTime: [],
         name: '',
         suggestTime: null,
-        titleItems: []
+        titleItems: [],
+        coverPath: '' // 🎯 重置时清空封面路径
       }
       this.form.id = lastId
     },
@@ -263,16 +330,36 @@ export default {
       levelEnum: state => state.user.levelEnum
     }),
     ...mapState('exam', { subjects: state => state.subjects })
-  }
+  },
+  /**
+ * 将 static/img/... 路径转换为 Vue @/assets/... 路径
+ * static/img/img2.9309e09c.png -> @/assets/img2.png
+ */
+convertStaticPathToAssets(path) {
+  if (!path) return '';
+  if (!path.startsWith('static/img/')) return path;
+
+  const filenameWithHash = path.replace('static/img/', '');
+  // 去掉哈希
+  const filename = filenameWithHash.replace(/\.[0-9a-f]{6,}\.(\w+)$/, '.$1');
+  return `@/assets/${filename}`;
+}
+
 }
 </script>
 
 <style lang="scss">
-  .exampaper-item-box {
-    .q-title {
-      margin: 0px 5px 0px 5px;
-    }
-    .q-item-content {
-    }
+.exampaper-item-box {
+  .q-title {
+    margin: 0 5px;
   }
+}
+
+.cover-preview-img {
+  width: 100px; 
+  height: auto; 
+  border: 1px solid #ccc; 
+  margin-left: 10px;
+  vertical-align: middle;
+}
 </style>

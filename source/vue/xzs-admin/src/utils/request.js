@@ -104,10 +104,55 @@ const form = function (url, params) {
   return request(false, query)
 }
 
+// ----------------------------------------------------
+// 新增内容：支持 PUT 和 DELETE 请求的方法
+// ----------------------------------------------------
+
+/**
+ * 发送带加载提示的 PUT 请求 (用于更新资源)
+ * @param {string} url - 请求 URL
+ * @param {object} params - 请求体数据 (data)
+ * @returns {Promise<any>}
+ */
+const putWithLoadTip = function (url, params) {
+  const query = {
+    baseURL: process.env.VUE_APP_URL,
+    url: url,
+    method: 'put', // 🎯 关键：设置为 'put'
+    withCredentials: true,
+    timeout: 30000,
+    data: params,
+    headers: { 'Content-Type': 'application/json', 'request-ajax': true }
+  }
+  return request(true, query)
+}
+
+/**
+ * 发送带加载提示的 DELETE 请求 (用于删除资源)
+ * @param {string} url - 请求 URL
+ * @param {object} params - 请求体数据 (通常为 null 或空对象)
+ * @returns {Promise<any>}
+ */
+const deleteWithLoadTip = function (url, params) {
+  const query = {
+    baseURL: process.env.VUE_APP_URL,
+    url: url,
+    method: 'delete', // 🎯 关键：设置为 'delete'
+    withCredentials: true,
+    timeout: 30000,
+    data: params, // DELETE 请求也可以携带 body
+    headers: { 'request-ajax': true }
+  }
+  return request(true, query)
+}
+
 export {
   post,
   postWithLoadTip,
   postWithOutLoadTip,
   get,
-  form
+  form,
+  // 导出新增的 PUT 和 DELETE 方法
+  putWithLoadTip,
+  deleteWithLoadTip
 }

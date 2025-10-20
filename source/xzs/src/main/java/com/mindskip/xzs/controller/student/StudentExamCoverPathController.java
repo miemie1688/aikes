@@ -16,7 +16,7 @@ import java.util.List;
  * 路径前缀通常包含 /student 或 /public
  */
 @RestController
-@RequestMapping("/student/cover_path")
+@RequestMapping("/api/student/cover_path")
 public class StudentExamCoverPathController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class StudentExamCoverPathController {
 
     // --- 1. 查询 (Retrieve) ---
     /**
-     * GET /student/cover_path/{examId}
+     * GET /api/student/cover_path/{examId}
      * 根据试卷ID查询封面路径信息
      * 这是学生唯一允许的操作
      */
