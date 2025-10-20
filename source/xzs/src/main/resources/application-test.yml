@@ -1,8 +1,0 @@
-logging:
-  path: /usr/log/onlinejudge/
-
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/onlinejudge
-    username: onlinejudge
-    password: onlinejudge
