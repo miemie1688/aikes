@@ -1,15 +1,15 @@
 <template>
   <el-container class="full-height-container">
     <el-header
-      height="80px" class="student-header"
+      height="80px"
+      class="student-header"
     >
       <div class="header-content">
         <div>
-          
-<a href="/"><img
-              src="@/assets/logo.png"
-              class="logo-img"
-            /></a>
+          <a href="/"><img
+            src="@/assets/logo.png"
+            class="logo-img"
+          /></a>
         </div>
 
         <div class="head-user">
@@ -122,14 +122,12 @@ export default {
     routeSelect (path) {
       // 路由选择逻辑：判断当前路径是否属于顶级菜单项，以便高亮显示
       const topPaths = ['/index', '/paper/index', '/record/index', '/question/index', '/user/index'] // 增加了/user/index作为可高亮路径
-      
       // 检查当前路径是否以任何一个顶级路径开头（处理子路由）
       for (const p of topPaths) {
         if (path.startsWith(p) && p !== '/index' && path !== '/') { // 修正逻辑，避免 /index/xxx 匹配到 /index
           return p
         }
       }
-      
       // 特殊处理根路径或精确匹配 /index 的情况
       if (path === '/' || path === '/index' || path.startsWith('/index/')) {
         return '/index'
@@ -192,8 +190,6 @@ export default {
   width: auto; /* 宽度按比例自适应 */
   vertical-align: middle; /* 确保图片垂直居中对齐文本或父元素 */
 }
-
-
 .main-content-container {
   flex: 1; /* 核心：让这个容器占据剩余所有垂直空间 */
   overflow: hidden; /* 隐藏容器自身的溢出，由内部的 el-main 控制滚动 */
