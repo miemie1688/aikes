@@ -222,7 +222,7 @@ export default {
   align-items: center;
   flex-shrink: 0;
   padding-bottom: 5px;
-  background-color: #434a50;
+  background-color: #545c64;
 }
 .logo-img {
   height: 50px;
