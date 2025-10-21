@@ -36,11 +36,11 @@
 
     <div class="tab-container">
       <el-tabs v-model="activeTab" type="card" class="dashboard-tabs">
-
         <el-tab-pane label="固定试卷" name="fixedPaper">
+      
           <el-row class="app-item-contain">
            
-            <div style="padding-left: 15px">
+            <div style="padding-left: 0px">
               <el-row :gutter="20" class="el-row-left">
                 <el-col
                   :span="4"
@@ -367,7 +367,7 @@ $cartoon-card: #fff6fb;
 $cartoon-shadow: 0 4px 18px 0 rgba(80, 150, 255, 0.08), 0 8px 48px 0 rgba(255, 113, 206, 0.12);
 
 .dashboard-container {
-  padding: 28px 18px;
+  padding: 0; // 原为 28px 18px
   background: repeating-linear-gradient(
       135deg,
       #f9f9fa 0 15px,
@@ -473,12 +473,22 @@ $cartoon-shadow: 0 4px 18px 0 rgba(80, 150, 255, 0.08), 0 8px 48px 0 rgba(255, 1
       }
     }
     ::v-deep .el-tabs__content {
-      padding: 34px 20px 28px 22px;
+      padding: 0; // 去除原有内边距
       background: $cartoon-card;
       border: 2px solid $cartoon-blue;
       border-radius: 0 0 16px 16px;
       box-shadow: $cartoon-shadow;
       min-height: 410px;
+      // 试卷区域铺满整片空间
+      .app-item-contain {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        .el-row-left {
+          margin-left: 0 !important;
+          padding-left: 0 !important;
+        }
+      }
     }
   }
 }
