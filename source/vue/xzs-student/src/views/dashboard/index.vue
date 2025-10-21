@@ -40,7 +40,7 @@
       
           <el-row class="app-item-contain">
            
-            <div style="padding-left: 0px">
+            <div style="padding-left: 15px">
               <el-row :gutter="20" class="el-row-left">
                 <el-col
                   :span="4"
@@ -73,7 +73,7 @@
         <el-tab-pane label="时段试卷" name="timeLimitPaper">
           <el-row class="app-item-contain">
            
-            <div style="padding-left: 0px">
+            <div style="padding-left: 15px">
               <el-row :gutter="20" class="el-row-left">
                 <el-col :span="4" v-for="(item, index) in filteredTimeLimitPaper" :key="index">
                   <el-card :body-style="{ padding: '0px' }" v-loading="loading" style="margin-bottom: 20px;">

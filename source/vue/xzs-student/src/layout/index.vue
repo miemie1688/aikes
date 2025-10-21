@@ -100,6 +100,9 @@ export default {
     this.getUserMessageInfo()
     userApi.getCurrentUser().then(re => {
       this.userInfo = re.response
+    }).catch(() => {
+      // 未登录也允许访问首页
+      this.userInfo = { imagePath: null }
     })
   },
   watch: {
@@ -136,9 +139,9 @@ export default {
       messageCount: state => state.messageCount
     }),
     avatarPath () {
-      return this.userInfo.imagePath === null
-        ? require('@/assets/avatar.png')
-        : this.userInfo.imagePath
+      return this.userInfo && this.userInfo.imagePath
+        ? this.userInfo.imagePath
+        : require('@/assets/avatar.png')
     }
   }
 }
@@ -222,7 +225,7 @@ export default {
   align-items: center;
   flex-shrink: 0;
   padding-bottom: 5px;
-  background-color: #545c64;
+  background-color: #434a50;
 }
 .logo-img {
   height: 50px;
