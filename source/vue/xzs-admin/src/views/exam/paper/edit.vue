@@ -117,6 +117,7 @@ import coverPathApi from '@/api/admin/cover_path' // 🎯 导入封面路径API
 import img1 from '@/assets/img1.png'
 import img2 from '@/assets/img2.png'
 import img3 from '@/assets/img3.png'
+import img4 from '@/assets/img4.png'
 export default {
   components: { Pagination, QuestionShow },
   data () {
@@ -135,10 +136,12 @@ export default {
       subjectFilter: null,
       formLoading: false,
       // 🎯 封面选项的枚举数据
+      //在此新增即可
       coverEnum: [
         { key: 1, value: img1, label: '作文' },
         { key: 2, value: img2, label: '英语' },
-        { key: 3, value: img3, label: '数学' }
+        { key: 3, value: img3, label: '数学' },
+         { key: 4, value: img4, label: 'GESP' }
       ],
       rules: {
         level: [
