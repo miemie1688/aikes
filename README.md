@@ -24,7 +24,7 @@
 
 ### 爱克斯仓库版本地址
 
-* github - postgresql ：[https://github.com/miemie1688/xzs](https://github.com/miemie1688/xzs)
+* github - postgresql ：[https://github.com/miemie1688/aikes](https://github.com/miemie1688/aikes)
 
 ### 学生系统功能
 
