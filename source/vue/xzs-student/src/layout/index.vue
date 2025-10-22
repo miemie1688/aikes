@@ -1,6 +1,5 @@
 <template>
   <el-container class="full-height-container">
-    <!-- 侧边导航栏，fixed定位 -->
     <el-aside
       width="200px"
       class="student-aside"
@@ -32,7 +31,32 @@
         </el-menu-item>
       </el-menu>
 
+      <div class="aside-logout-button">
+        <el-button
+          v-if="isLoggedIn"
+          type="warning"
+          icon="el-icon-switch-button"
+          size="small"
+          round
+          @click="logout"
+        >
+          退出登录
+        </el-button>
+        
+        <el-button
+          v-else
+          type="primary"
+          icon="el-icon-user"
+          size="small"
+          round
+          @click="$router.push({ path: '/login' })"
+        >
+          去登录
+        </el-button>
+      </div>
+
       <div class="aside-footer-user">
+        
         <el-dropdown trigger="click" placement="right">
           <el-badge :is-dot="messageCount !== 0">
             <el-avatar
@@ -49,7 +73,7 @@
               </el-badge>
               <span v-if="messageCount === 0">消息中心</span>
             </el-dropdown-item>
-            <el-dropdown-item @click.native="logout" divided>退出</el-dropdown-item>
+            
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -65,7 +89,6 @@
       </div>
     </el-aside>
 
-    <!-- 右侧主内容区域 -->
     <el-container class="main-content-container">
       <el-main class="student-main">
         <router-view />
@@ -74,10 +97,9 @@
 
     <div class="foot-copyright">
       
- 
       <span>@湖州爱克斯科技</span>
     </div>
- 
+    
   </el-container>
 </template>
 
@@ -85,6 +107,9 @@
 import { mapActions, mapMutations, mapState } from 'vuex'
 import loginApi from '@/api/login'
 import userApi from '@/api/user'
+// 引入试卷封面路径 API，用于判断登录状态
+import { getAllCoverPaths } from '@/api/cover_path'
+
 export default {
   name: 'Layout',
   data () {
@@ -92,16 +117,31 @@ export default {
       defaultUrl: '/index',
       userInfo: {
         imagePath: null
-      }
+      },
+      // 【新增】显式追踪登录状态
+      userIsLoggedIn: false
     }
   },
   created () {
     this.defaultUrl = this.routeSelect(this.$route.path)
     this.getUserMessageInfo()
-    userApi.getCurrentUser().then(re => {
-      this.userInfo = re.response
+    
+    // 【修改】尝试调用一个受保护的 API（getAllCoverPaths）来判断是否登录
+    getAllCoverPaths().then(() => {
+      // 成功：认为用户已登录
+      this.userIsLoggedIn = true
+      
+      // 登录成功后，再获取用户信息（用于头像等）
+      userApi.getCurrentUser().then(re => {
+        this.userInfo = re.response
+      }).catch(() => {
+        // 如果获取用户信息失败，重置头像信息
+        this.userInfo = { imagePath: null }
+      })
+      
     }).catch(() => {
-      // 未登录也允许访问首页
+      // 失败（如 401 未授权）：认为用户未登录
+      this.userIsLoggedIn = false
       this.userInfo = { imagePath: null }
     })
   },
@@ -124,11 +164,12 @@ export default {
       return null
     },
     logout () {
-      loginApi.logout().then((result) => {
-        if (result && result.code === 1) {
-          this.clearLogin()
-          this.$router.push({ path: '/login' })
-        }
+      loginApi.logout().then(() => {
+        this.clearLogin()
+        // 退出登录后，重置登录状态和用户信息
+        this.userIsLoggedIn = false
+        this.userInfo = { imagePath: null }
+        this.$router.push({ path: '/login' })
       })
     },
     ...mapActions('user', ['getUserMessageInfo']),
@@ -138,6 +179,12 @@ export default {
     ...mapState('user', {
       messageCount: state => state.messageCount
     }),
+    
+    // 【修改】直接使用状态变量判断是否登录
+    isLoggedIn () {
+      return this.userIsLoggedIn
+    },
+    
     avatarPath () {
       return this.userInfo && this.userInfo.imagePath
         ? this.userInfo.imagePath
@@ -201,6 +248,16 @@ export default {
     }
     padding-right: 20px !important;
   }
+}
+
+/* **新增：独立退出/登录按钮样式** */
+.aside-logout-button {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; /* 确保不被菜单挤压 */
+  padding: 10px 0;
 }
 
 /* 用户头像区域 */

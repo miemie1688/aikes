@@ -13,6 +13,16 @@
 
     <div class="login-container dark-theme">
 
+      <div class="back-home-button">
+        <el-button
+          type="text"
+          icon="el-icon-s-home"
+          class="home-btn"
+          @click="$router.push({ path: '/index' })"
+        >
+          返回首页
+        </el-button>
+      </div>
       <div class="lowin lowin-blue dark-form">
 
         <div class="lowin-brand dark-brand">
@@ -167,11 +177,13 @@ export default {
               _this.$router.push({ path: '/' })
             } else {
               _this.loading = false
+              // 注意：这里是 Element UI 的消息提示
               _this.$message.error(result.message)
             }
           }).catch(function () {
             // 模拟网络错误或API调用失败
             _this.loading = false
+            // 注意：这里是 Element UI 的消息提示
             _this.$message.error('登录失败，请检查网络或服务器状态。')
           })
         } else {
@@ -229,6 +241,24 @@ $dark-bg-blue: #0d1a26;
     opacity: 1 !important;
     box-shadow: 0 0 20px rgba(0, 255, 255, 1) !important; /* 悬停时发光更强 */
 }
+
+/* **新增：返回首页按钮的基础样式** */
+.back-home-button .home-btn {
+  color: $tech-blue !important;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 15px;
+  border: 1px solid $tech-blue;
+  background-color: rgba(10, 25, 40, 0.5);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+.back-home-button .home-btn:hover {
+  background-color: $tech-blue;
+  color: $dark-bg-blue !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
 </style>
 
 <style scoped>
@@ -280,11 +310,19 @@ $dark-bg-blue: #0d1a26;
   display: flex;
   flex-direction: column;
 
-  position: relative;
+  position: relative; /* **关键：使绝对定位的按钮能参照它** */
   background-color: var(--dark-bg);
   color: #eee;
   /* 增加一个微妙的背景纹理或发光，模拟科技感 */
   background-image: radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.0) 70%);
+}
+
+/* **新增：返回首页按钮的定位** */
+.back-home-button {
+  position: absolute;
+  top: 20px; /* 距离顶部 20px */
+  right: 20px; /* 距离右侧 20px */
+  z-index: 10; /* 确保它在其他元素之上 */
 }
 
 /* lowin 整体风格 */
@@ -322,7 +360,7 @@ $dark-bg-blue: #0d1a26;
  border-radius: 8px;
  box-shadow:
    0 0 20px rgba(0, 255, 255, 0.5), /* 外部光晕 */
-  inset 0 0 10px rgba(0, 255, 255, 0.3); /* 内部微光 */
+ inset 0 0 10px rgba(0, 255, 255, 0.3); /* 内部微光 */
  backdrop-filter: blur(5px); /* 磨砂玻璃效果 */
 }
 
@@ -435,8 +473,8 @@ $dark-bg-blue: #0d1a26;
   }
   .lowin .lowin-wrapper.dark-wrapper {
     width: 95%; /* 小屏幕下也增加宽度 */
- padding: 30px;
-   max-width: none;
+  padding: 30px;
+    max-width: none;
   }
 }
 </style>

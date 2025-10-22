@@ -65,7 +65,7 @@
                   </el-card>
                 </el-col>
               </el-row>
-              <p v-if="filteredFixedPaper.length === 0" style="color:#999;">未找到匹配的固定试卷</p>
+              <p v-if="filteredFixedPaper.length === 0" style="color:#999;">未找到匹配的固定试卷或者未登录</p>
             </div>
           </el-row>
         </el-tab-pane>
@@ -98,7 +98,7 @@
                   </el-card>
                 </el-col>
               </el-row>
-              <p v-if="filteredTimeLimitPaper.length === 0" style="color:#999;">未找到匹配的时段试卷</p>
+              <p v-if="filteredTimeLimitPaper.length === 0" style="color:#999;">未找到匹配的时段试卷或者未登录</p>
             </div>
           </el-row>
         </el-tab-pane>
@@ -159,7 +159,8 @@
                   </table>
                 </el-collapse-item>
               </el-collapse>
-              <p v-else style="color:#999;">未找到匹配的任务</p>
+              <p v-else style="color:#999;">未找到匹配的任务或者未登录  </p>
+              
             </div>
           </el-row>
         </el-tab-pane>

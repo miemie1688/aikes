@@ -22,6 +22,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 // 允许首页和登录、注册页面无需登录，其他页面可按需加权限校验
 router.beforeEach(async (to, from, next) => {
   // start progress bar
+  
   NProgress.start()
   if (to.meta.title !== undefined) {
     document.title = to.meta.title

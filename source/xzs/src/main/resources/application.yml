@@ -1,6 +1,6 @@
 #vue源码测试端口8008
 server:
-  port: 8888
+  port: 8008
   undertow:
     io-threads: 16
     worker-threads: 4000

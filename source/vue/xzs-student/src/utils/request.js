@@ -15,17 +15,18 @@ const request = function (loadtip, query) {
     .then(res => {
       if (loadtip) {
         loading.close()
-      }
+      } 
+      
       if (res.data.code === 401) {
-        vue.prototype.$$router.push({ path: '/login' })
+       
         return Promise.reject(res.data)
       } else if (res.data.code === 500) {
         return Promise.reject(res.data)
       } else if (res.data.code === 501) {
         return Promise.reject(res.data)
       } else if (res.data.code === 502) {
-        vue.prototype.$$router.push({ path: '/login' })
-        return Promise.reject(res.data)
+      return Promise.resolve(res.data)
+        
       } else {
         return Promise.resolve(res.data)
       }
@@ -34,7 +35,7 @@ const request = function (loadtip, query) {
       if (loadtip) {
         loading.close()
       }
-      vue.prototype.$message.error(e.message)
+    //  vue.prototype.$message.error(e.message)
       return Promise.reject(e.message)
     })
 }
