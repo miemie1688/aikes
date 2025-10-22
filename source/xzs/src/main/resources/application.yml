@@ -1,4 +1,4 @@
-#vue源码测试端口8008
+#vue源码测试端口8888
 server:
   port: 8888
   undertow:
