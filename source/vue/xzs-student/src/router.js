@@ -3,10 +3,21 @@ import Router from 'vue-router'
 import Layout from '@/layout'
 
 Vue.use(Router)
+
 const router = new Router({
   routes: [
-    { path: '/login', name: 'Login', component: () => import('@/views/login/index'), meta: { title: '登录', bodyBackground: '#fbfbfb' } },
-    { path: '/register', name: 'Register', component: () => import('@/views/register/index'), meta: { title: '注册', bodyBackground: '#fbfbfb' } },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/views/login/index'),
+      meta: { title: '登录', bodyBackground: '#fbfbfb' }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('@/views/register/index'),
+      meta: { title: '注册', bodyBackground: '#fbfbfb' }
+    },
     {
       path: '/',
       component: Layout,
@@ -65,13 +76,7 @@ const router = new Router({
           component: () => import('@/views/user-info/index'),
           name: 'UserInfo',
           meta: { title: '个人中心' }
-        }
-      ]
-    },
-    {
-      path: '/user',
-      component: Layout,
-      children: [
+        },
         {
           path: 'message',
           component: () => import('@/views/user-info/message'),
@@ -80,12 +85,29 @@ const router = new Router({
         }
       ]
     },
-    { path: '/do', name: 'ExamPaperDo', component: () => import('@/views/exam/paper/do'), meta: { title: '试卷答题' } },
-    { path: '/edit', name: 'ExamPaperEdit', component: () => import('@/views/exam/paper/edit'), meta: { title: '试卷批改' } },
-    { path: '/read', name: 'ExamPaperRead', component: () => import('@/views/exam/paper/read'), meta: { title: '试卷查看' } },
-    { path: '*', component: () => import('@/views/error-page/404'), meta: { title: '404' }
+    {
+      path: '/do',
+      name: 'ExamPaperDo',
+      component: () => import('@/views/exam/paper/do'),
+      meta: { title: '试卷答题' }
+    },
+    {
+      path: '/edit',
+      name: 'ExamPaperEdit',
+      component: () => import('@/views/exam/paper/edit'),
+      meta: { title: '试卷批改' }
+    },
+    {
+      path: '/read',
+      name: 'ExamPaperRead',
+      component: () => import('@/views/exam/paper/read'),
+      meta: { title: '试卷查看' }
+    },
+    {
+      path: '*',
+      component: () => import('@/views/error-page/404'),
+      meta: { title: '404' }
     }
   ]
 })
-
 export { router }

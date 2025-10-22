@@ -40,7 +40,7 @@
       
           <el-row class="app-item-contain">
            
-            <div style="padding-left: 0px">
+            <div style="padding-left: 15px">
               <el-row :gutter="20" class="el-row-left">
                 <el-col
                   :span="4"
@@ -65,7 +65,7 @@
                   </el-card>
                 </el-col>
               </el-row>
-              <p v-if="filteredFixedPaper.length === 0" style="color:#999;">未找到匹配的固定试卷</p>
+              <p v-if="filteredFixedPaper.length === 0" style="color:#999;">未找到匹配的固定试卷或者未登录</p>
             </div>
           </el-row>
         </el-tab-pane>
@@ -73,7 +73,7 @@
         <el-tab-pane label="时段试卷" name="timeLimitPaper">
           <el-row class="app-item-contain">
            
-            <div style="padding-left: 0px">
+            <div style="padding-left: 15px">
               <el-row :gutter="20" class="el-row-left">
                 <el-col :span="4" v-for="(item, index) in filteredTimeLimitPaper" :key="index">
                   <el-card :body-style="{ padding: '0px' }" v-loading="loading" style="margin-bottom: 20px;">
@@ -98,7 +98,7 @@
                   </el-card>
                 </el-col>
               </el-row>
-              <p v-if="filteredTimeLimitPaper.length === 0" style="color:#999;">未找到匹配的时段试卷</p>
+              <p v-if="filteredTimeLimitPaper.length === 0" style="color:#999;">未找到匹配的时段试卷或者未登录</p>
             </div>
           </el-row>
         </el-tab-pane>
@@ -159,7 +159,8 @@
                   </table>
                 </el-collapse-item>
               </el-collapse>
-              <p v-else style="color:#999;">未找到匹配的任务</p>
+              <p v-else style="color:#999;">未找到匹配的任务或者未登录  </p>
+              
             </div>
           </el-row>
         </el-tab-pane>
