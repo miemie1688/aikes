@@ -12,14 +12,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    private final UserService userService;
-    private final SystemConfig systemConfig;
+//set注入
+// 声明字段，不再使用 final
+private UserService userService;
+    private SystemConfig systemConfig;
+
+private DjangoPBKDF2Encoder djangoPBKDF2Encoder;
+    // 移除原有的构造函数
+
+    // Setter 注入方法
+    @Autowired
+    public void setDjangoPBKDF2Encoder(DjangoPBKDF2Encoder djangoPBKDF2Encoder) {
+        this.djangoPBKDF2Encoder = djangoPBKDF2Encoder;
+    }
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
-    public AuthenticationServiceImpl(UserService userService, SystemConfig systemConfig) {
-        this.userService = userService;
+    public void setSystemConfig(SystemConfig systemConfig) {
         this.systemConfig = systemConfig;
     }
+
+    // Setter 注入方法（在解决循环依赖时特别有用）
+
 
 
     /**
@@ -43,15 +60,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (null == encodePwd || encodePwd.length() == 0) {
             return false;
         }
-        String pwd = pwdDecode(encodePwd);
-        return pwd.equals(password);
+        return checkPwd(password, encodePwd);
     }
 
     @Override
     public String pwdEncode(String password) {
-        return RsaUtil.rsaEncode(systemConfig.getPwdKey().getPublicKey(), password);
+        // 调用 DjangoPBKDF2Encoder 进行密码编码
+        String encodePwd = djangoPBKDF2Encoder.encode(password);
+        return encodePwd;
     }
-
+    public boolean checkPwd(String rawPassword, String encodedPasswordFromDb) {
+        // rawPassword: 用户输入的明文密码
+        // encodedPasswordFromDb: 数据库中存储的 PBKDF2 哈希值
+        return djangoPBKDF2Encoder.matches(rawPassword, encodedPasswordFromDb);
+    }
     @Override
     public String pwdDecode(String encodePwd) {
         return RsaUtil.rsaDecode(systemConfig.getPwdKey().getPrivateKey(), encodePwd);

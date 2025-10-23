@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mindskip.xzs.domain.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_uuid" jdbcType="VARCHAR" property="userUuid" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="username" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="age" jdbcType="INTEGER" property="age" />
@@ -22,21 +22,21 @@
     <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_uuid, user_name, password, real_name, age, sex, birth_day, user_level, phone,
+    id, user_uuid, username, password, real_name, age, sex, birth_day, user_level, phone,
     role, status, image_path, create_time, modify_time, last_active_time, deleted, wx_open_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from t_user
+    from "user"
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_user
+    delete from "user"
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mindskip.xzs.domain.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into t_user (id, user_uuid, user_name,
+    insert into "user" (id, user_uuid, username,
       password, real_name, age,
       sex, birth_day, user_level,
       phone, role, status,
@@ -52,7 +52,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.mindskip.xzs.domain.User" useGeneratedKeys="true" keyProperty="id" >
-    insert into t_user
+    insert into "user"
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -61,7 +61,7 @@
         user_uuid,
       </if>
       <if test="userName != null">
-        user_name,
+        username,
       </if>
       <if test="password != null">
         password,
@@ -167,13 +167,13 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.mindskip.xzs.domain.User">
-    update t_user
+    update "user"
     <set>
       <if test="userUuid != null">
         user_uuid = #{userUuid}::uuid,
       </if>
       <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+        username = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -224,9 +224,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mindskip.xzs.domain.User">
-    update t_user
+    update "user"
     set user_uuid = #{userUuid}::uuid,
-      user_name = #{userName,jdbcType=VARCHAR},
+      username = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
@@ -250,34 +250,34 @@
   <select id="getAllUser" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from t_user where deleted='f'
+    from "user" where deleted='f'
   </select>
 
   <select id="getUserById" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from t_user
+    from "user"
     where id=#{value}
   </select>
 
   <select id="getUserByUserName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from t_user
-    where deleted='f' and user_name=#{value} limit 1
+    from "user"
+    where deleted='f' and username=#{value} limit 1
   </select>
 
   <select id="getUserByUserNamePwd" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from t_user
-    where deleted='f' and user_name=#{username} and password=#{pwd} limit 1
+    from "user"
+    where deleted='f' and username=#{username} and password=#{pwd} limit 1
   </select>
 
   <select id="getUserByUuid" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from t_user
+    from "user"
     where deleted='f' and user_uuid=#{value}::uuid
   </select>
 
@@ -285,7 +285,7 @@
   <select id="userPageList" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM t_user
+    FROM "user"
     <where>
         and deleted='f'
       <if test="name != null and name != ''">
@@ -301,7 +301,7 @@
 
 
   <select id="userPageCount" resultType="java.lang.Integer">
-    select count(*) from t_user
+    select count(*) from "user"
     <where>
         and deleted='f'
       <if test="name != null and name != ''">
@@ -314,11 +314,11 @@
   <select id="userPage" resultMap="BaseResultMap" parameterType="com.mindskip.xzs.viewmodel.admin.user.UserPageRequestVM">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM t_user
+    FROM "user"
     <where>
         and deleted='f'
       <if test="userName != null and userName != ''">
-        and user_name like concat('%',#{userName},'%')
+        and username like concat('%',#{userName},'%')
       </if>
       <if test="role != null ">
         and role= #{role}
@@ -330,16 +330,16 @@
 
   <insert id="insertUser" parameterType="com.mindskip.xzs.domain.User"
           useGeneratedKeys="true" keyProperty="id">
-		insert into t_user
-		(user_uuid,user_name,password,real_name,age, last_active_time)
+		insert into "user"
+		(user_uuid,username,password,real_name,age, last_active_time)
 		values
 		(#{userUuid}::uuid,#{userName},#{password},#{realName},#{age},#{lastActiveTime})
 	</insert>
 
   <insert id="insertUsers" parameterType="java.util.List"
           useGeneratedKeys="true" keyProperty="id">
-    insert into t_user
-    (user_uuid,user_name,password,real_name,age,last_active_time)
+    insert into "user"
+    (user_uuid,username,password,real_name,age,last_active_time)
     values
     <foreach collection="list" item="item" index="index"
              separator=",">
@@ -350,7 +350,7 @@
 
 
   <update id="updateUser" parameterType="com.mindskip.xzs.domain.User">
-    update t_user
+    update "user"
     <set>
       <if test="realName != null">real_name = #{realName},</if>
       <if test="age != null">age = #{age},</if>
@@ -361,7 +361,7 @@
 
 
   <update id="updateUsersAge">
-    update t_user set age = #{age} where id in
+    update "user" set age = #{age} where id in
     <foreach item="id" collection="idslist" open="(" separator=","
              close=")">
       #{id}
@@ -370,7 +370,7 @@
 
 
   <delete id="deleteUsersByIds">
-    delete from t_user where id in
+    delete from "user" where id in
     <foreach item="id" collection="list" open="(" separator=","
              close=")">
       #{id}
@@ -378,14 +378,14 @@
   </delete>
 
   <select id="selectAllCount"  resultType="java.lang.Integer">
-		SELECT count(*) from t_user where deleted='f'
+		SELECT count(*) from "user" where deleted='f'
   </select>
 
 
   <select id="selectByUserName"  resultType="com.mindskip.xzs.domain.other.KeyValue">
-		SELECT  id as value,user_name as name
-		from t_user
-		where deleted='f' and user_name like concat('%',#{value},'%')
+		SELECT  id as value,username as name
+		from "user"
+		where deleted='f' and username like concat('%',#{value},'%')
 		limit 5
   </select>
 
@@ -393,7 +393,7 @@
   <select id="selectByIds" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-     from t_user
+     from "user"
      where id in
     <foreach item="id" collection="list" open="(" separator=","
              close=")">
@@ -405,7 +405,7 @@
   <select id="selectByWxOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from t_user
+    from "user"
     where deleted='f' and  wx_open_id = #{wxOpenId}
     limit 1
   </select>

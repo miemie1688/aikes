@@ -31,14 +31,34 @@ import java.util.ArrayList;
 @Component
 public class RestAuthenticationProvider implements AuthenticationProvider {
 
-    private final AuthenticationService authenticationService;
-    private final UserService userService;
-    private final WebContext webContext;
+    private AuthenticationService authenticationService;
+    private UserService userService;
+    private WebContext webContext;
 
+    // 2. 移除原有的构造函数
+    /*
     @Autowired
     public RestAuthenticationProvider(AuthenticationService authenticationService, UserService userService, WebContext webContext) {
         this.authenticationService = authenticationService;
         this.userService = userService;
+        this.webContext = webContext;
+    }
+    */
+
+    // 3. 添加带有 @Autowired 注解的 Setter 方法
+
+    @Autowired
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setWebContext(WebContext webContext) {
         this.webContext = webContext;
     }
 
