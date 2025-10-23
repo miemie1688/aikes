@@ -62,7 +62,7 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             // 1. 生成随机盐 (Salt)
             byte[] saltBytes = new byte[SALT_LENGTH_BYTES];
             secureRandom.nextBytes(saltBytes);
-
+            System.out.println("💡生成的盐 (Salt): " + Arrays.toString(saltBytes));
             // 将盐编码为 Base64 字符串，不使用填充
             // 注意：此处省略了原始代码中的兼容性注释，直接采用Base64无填充编码
             String salt = Base64.getEncoder().withoutPadding().encodeToString(saltBytes);
@@ -116,7 +116,8 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             int iterations = Integer.parseInt(parts[0]);
             String salt = parts[1];
             String encodedHash = parts[2];
-
+            byte[] saltBytes1 = salt.getBytes(StandardCharsets.UTF_8);
+            System.out.println("💡jiema的盐 (Salt): " + Arrays.toString(saltBytes1));
             // 计算原始密码的哈希值
             byte[] hash = pbkdf2(
                     rawPassword.toCharArray(),

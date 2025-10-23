@@ -118,6 +118,8 @@ import img1 from '@/assets/img1.png'
 import img2 from '@/assets/img2.png'
 import img3 from '@/assets/img3.png'
 import img4 from '@/assets/img4.png'
+import img5 from '@/assets/img5.png'
+import img6 from '@/assets/img6.png'
 export default {
   components: { Pagination, QuestionShow },
   data () {
@@ -138,10 +140,12 @@ export default {
       // 🎯 封面选项的枚举数据
       //在此新增即可
       coverEnum: [
-        { key: 1, value: img1, label: '作文' },
+        { key: 1, value: img1, label: '语文' },
         { key: 2, value: img2, label: '英语' },
         { key: 3, value: img3, label: '数学' },
-         { key: 4, value: img4, label: 'GESP' }
+         { key: 4, value: img4, label: 'GESP' },
+         { key: 5, value: img5, label: '文科综合' },
+         { key: 6, value: img6, label: '理科综合' }
       ],
       rules: {
         level: [
