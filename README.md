@@ -1,22 +1,9 @@
-<p>test</p>
 <p></p>
 
 <p align="center">
-<a href="https://www.mindskip.net" target="_blank">
- <img src="https://www.mindskip.net/style/git/images/logo/1.png" height="80"/>
+<a href="https://https://60.204.175.19/" target="_blank">
 <a/>
 </p>
-
-<div align="center">
-
-[![Gitee star](https://gitee.com/mindskip/xzs/badge/star.svg?theme=gvp)](https://gitee.com/mindskip/xzs) 
-[![Gitee fork](https://gitee.com/mindskip/xzs/badge/fork.svg?theme=gvp)](https://gitee.com/mindskip/xzs)
-[![Github stars](https://img.shields.io/github/stars/mindskip/xzs?logo=github)](https://github.com/mindskip/xzs) 
-[![Github forks](https://img.shields.io/github/forks/mindskip/xzs?logo=github)](https://github.com/mindskip/xzs) 
-![star](https://gitcode.com/mindskip/xzs/star/badge.svg)
-[![Github license](https://img.shields.io/badge/license-AGPL-yellow)](https://gitee.com/mindskip/xzs/blob/master/LICENSE) 
-
-</div>
 
 # 爱克斯开源考试系统 - Postgresql版
 
@@ -27,30 +14,17 @@
 
 ### 演示地址
 
-* 官网：[https://www.mindskip.net](https://www.mindskip.net)
-* 爱克斯学习系统：[https://www.mindskip.net/xzs.html](https://www.mindskip.net/xzs.html)
-* 维多多培训考试系统：[https://www.mindskip.net/wdd.html](https://www.mindskip.net/wdd.html)
-* 思多多智能考试系统：[https://www.mindskip.net/sdd.html](https://www.mindskip.net/sdd.html)
+* 官网：[https://60.204.175.19/](https://60.204.175.19/)
+* 爱克斯学习系统：[https://60.204.175.19/](https://60.204.175.19/)
 
 ### 文档视频教程
+* 文档教程：https://www.mindskip.net:888/
+* 商务微信：`18503485859`
+* 商务邮箱：`410052065@qq.com`
 
-* 数据库脚本下载地址：[https://www.mindskip.net:888](https://www.mindskip.net:888)
-* 文档教程：[https://www.mindskip.net:888](https://www.mindskip.net:888)
-* 视频教程：[https://space.bilibili.com/1389892305](https://space.bilibili.com/1389892305)
-* QQ交流群17：`624825080`
-* 商务QQ：`2732007709`
-* 商务微信：`whmindskip`
-* 商务邮箱：`mindskip@qq.com`
+### 爱克斯仓库版本地址
 
-### 学之思仓库版本地址
-
-* gitee - postgresql ：[https://gitee.com/mindskip/xzs](https://gitee.com/mindskip/xzs)
-* gitee - mysql ：[https://gitee.com/mindskip/xzs-mysql](https://gitee.com/mindskip/xzs-mysql)
-* github - postgresql ：[https://github.com/mindskip/xzs](https://github.com/mindskip/xzs)
-* github - mysql ：[https://github.com/mindskip/xzs-mysql](https://github.com/mindskip/xzs-mysql)
-* gitcode - postgresql ：[https://gitcode.com/mindskip/xzs](https://gitcode.com/mindskip/xzs)
-* gitcode - mysql ：[https://gitcode.com/mindskip/xzs-mysql](https://gitcode.com/mindskip/xzs-mysql)
-
+* github - postgresql ：[https://github.com/miemie1688/aikes](https://github.com/miemie1688/aikes)
 
 ### 学生系统功能
 

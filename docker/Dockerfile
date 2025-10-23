@@ -8,7 +8,7 @@ WORKDIR /app
 EXPOSE 8888
 
 # 复制本地 Maven/Gradle 打好的 jar 包
-COPY ./aikes-3.9.3.jar aikes-3.9.3.jar
+COPY ./aikes-3.9.4.jar aikes-3.9.4.jar
 
 # 启动命令
-ENTRYPOINT ["java", "-jar", "/app/aikes-3.9.3.jar"]
+ENTRYPOINT ["java", "-jar", "/app/aikes-3.9.4.jar"]
