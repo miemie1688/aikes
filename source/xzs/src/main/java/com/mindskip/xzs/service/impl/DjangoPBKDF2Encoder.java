@@ -66,11 +66,12 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             // 将盐编码为 Base64 字符串，不使用填充
             // 注意：此处省略了原始代码中的兼容性注释，直接采用Base64无填充编码
             String salt = Base64.getEncoder().withoutPadding().encodeToString(saltBytes);
-
+           // byte[] b64Bytes = Base64.getEncoder().encode(salt.getBytes());
             // 2. 计算 PBKDF2 哈希
+            System.out.println("💡加密的盐 (Salt): " + Arrays.toString(saltBytes));
             byte[] hashBytes = pbkdf2(
                     rawPassword.toCharArray(),
-                    salt.getBytes(StandardCharsets.UTF_8), // 核心函数要求字节数组
+                   saltBytes, // 核心函数要求字节数组
                     iterations,
                     KEY_LENGTH_BYTES
             );
@@ -116,12 +117,16 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             int iterations = Integer.parseInt(parts[0]);
             String salt = parts[1];
             String encodedHash = parts[2];
-            byte[] saltBytes1 = salt.getBytes(StandardCharsets.UTF_8);
-            System.out.println("💡jiema的盐 (Salt): " + Arrays.toString(saltBytes1));
+            Base64.Decoder decoder = Base64.getDecoder();
+
+            // 3b. 执行解码：将 Base64 字符串还原为字节数组
+            byte[] b64Bytes = decoder.decode(salt);
+
+            System.out.println("💡解密的盐 (Salt): " + Arrays.toString(b64Bytes));
             // 计算原始密码的哈希值
             byte[] hash = pbkdf2(
                     rawPassword.toCharArray(),
-                    salt.getBytes(StandardCharsets.UTF_8),
+                    b64Bytes, // 核心函数要求字节数组
                     iterations,
                     KEY_LENGTH_BYTES
             );
