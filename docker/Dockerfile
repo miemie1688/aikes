@@ -4,6 +4,12 @@ FROM openjdk:8-jre-slim-buster
 RUN mkdir -p /app
 WORKDIR /app
 
+# 设置环境变量
+ENV LOG_PATH=/app/logs
+
+# 创建日志目录
+RUN mkdir -p ${LOG_PATH}
+
 # 暴露应用端口
 EXPOSE 8888
 

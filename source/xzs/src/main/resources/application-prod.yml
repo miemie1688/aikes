@@ -1,16 +1,20 @@
 logging:
-path: ./log/aikes/
+  path: ./log/aikes/
 
 spring:
-datasource:
- url: jdbc:postgresql://oj-postgres:5432/onlinejudge
- username: onlinejudge
- password: onlinejudge
+  datasource:
+    url: jdbc:postgresql://oj-postgres:5432/onlinejudge
+    username: onlinejudge
+    password: onlinejudge
+    driver-class-name: org.postgresql.Driver
+
 # logging:
 #   path: ./log/aikes/
 #
 # spring:
 #   datasource:
 #     url: jdbc:postgresql://localhost:5432/onlinejudge
-#     username: postgres
-#     password: 123456
+#     username: onlinejudge
+#     password: onlinejudge
+#     driver-class-name: org.postgresql.Driver
+
