@@ -68,16 +68,16 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             byte[] saltBytes = new byte[SALT_LENGTH_BYTES];
             secureRandom.nextBytes(saltBytes);
             String salt = Base64.getEncoder().withoutPadding().encodeToString(saltBytes);
-            System.out.println("💡💡💡💡生成的盐 (Salt): " + Arrays.toString(saltBytes));
+            System.out.println("💡💡💡💡💡💡💡💡💡💡生成的盐 (Salt): " + Arrays.toString(saltBytes));
+            log.info("💡💡💡💡💡💡💡💡💡💡生成的盐 (Salt): " + Arrays.toString(saltBytes));
             // 将盐编码为 Base64 字符串，不使用填充
             // 注意：此处省略了原始代码中的兼容性注释，直接采用Base64无填充编码
            // String salt = Base64.getEncoder().withoutPadding().encodeToString(saltBytes);
            // byte[] b64Bytes = Base64.getEncoder().encode(salt.getBytes());
-
-            log.info("aaaaa💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡💡");
             // 2. 计算 PBKDF2 哈希
 
-            System.out.println("💡💡💡💡💡加密的盐 (Salt): " + Arrays.toString(salt.getBytes()));
+            System.out.println("💡💡💡💡💡💡💡💡💡💡加密的盐 (Salt): " + Arrays.toString(salt.getBytes()));
+            log.info("💡💡💡💡💡💡💡💡💡💡加密的盐 (Salt): " + Arrays.toString(salt.getBytes()));
             byte[] hashBytes = pbkdf2(
                     rawPassword.toCharArray(),
                    salt.getBytes(), // 核心函数要求字节数组
@@ -115,8 +115,8 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
     public boolean matches(String rawPassword, String hashedPassword) {
         System.out.println("\n--- 开始验证密码 ---");
         System.out.println("原始密码 (rawPassword): " + rawPassword);
-        System.out.println("目标哈希 (hashedPassword): " + hashedPassword);
-
+        System.out.println("💡💡💡💡💡目标哈希 (hashedPassword): " + hashedPassword);
+        log.info("💡💡💡💡💡目标哈希 (hashedPassword): " + hashedPassword);
         String[] parts = parse(hashedPassword);
         if (parts == null) {
             return false;
@@ -128,8 +128,9 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             String encodedHash = parts[2];
 
 
-            System.out.println("💡💡💡💡💡解密的盐 (Salt): " + Arrays.toString(salt.getBytes()));
+            System.out.println("💡💡💡💡💡💡💡💡💡💡解密的盐 (Salt): " + Arrays.toString(salt.getBytes()));
             // 计算原始密码的哈希值
+            log.info("💡💡💡💡💡💡💡💡💡💡解密的盐 (Salt): " + Arrays.toString(salt.getBytes()));
             byte[] hash = pbkdf2(
                     rawPassword.toCharArray(),
                    salt.getBytes(), // 核心函数要求字节数组
@@ -139,7 +140,8 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
 
             // 将计算出的字节哈希值进行 Base64 编码
             String computedHash = Base64.getEncoder().encodeToString(hash);
-
+            System.out.println("💡💡💡💡💡解密的哈希 (Hash): " + computedHash);
+            log.info("💡💡💡💡💡解密的哈希 (Hash): " + computedHash);
             // 使用常量时间比较以防止时序攻击 (这里为了简洁，仍使用 equals，但生产环境应优化)
             boolean result = computedHash.equals(encodedHash);
             System.out.println("比较结果: " + (result ? "匹配" : "不匹配"));
