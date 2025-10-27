@@ -68,6 +68,7 @@ public class RestAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
 
         com.mindskip.xzs.domain.User user = userService.getUserByUserName(username);
+
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }

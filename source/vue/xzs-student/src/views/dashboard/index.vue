@@ -178,7 +178,37 @@
     </div>
   </el-row>
 </el-tab-pane>
-
+<el-tab-pane label="🏆思维实验室" name="fixedPaper">
+          <el-row class="app-item-contain">
+            <div style="padding-left: 15px">
+              <el-row :gutter="20" class="el-row-left">
+                <el-col
+                  :span="4"
+                  v-for="(item, index) in filteredFixedPaper"
+                  :key="index"
+                >
+                  <el-card :body-style="{ padding: '0px' }" v-loading="loading" style="margin-bottom: 20px;">
+                    <img 
+                      :src="item.coverPath 
+                        ? getCoverImage(item.coverPath, require('@/assets/exam-paper/show2.png'))
+                        : require('@/assets/exam-paper/show1.png')" 
+                      class="image" 
+                    />
+                    <div style="padding: 14px;">
+                      <span>{{ item.name }}</span>
+                      <div class="bottom clearfix">
+                        <router-link target="_blank" :to="{ path: '/do', query: { id: item.id } }">
+                          <el-button type="text" class="button">开始做题</el-button>
+                        </router-link>
+                      </div>
+                    </div>
+                  </el-card>
+                </el-col>
+              </el-row>
+              <p v-if="filteredFixedPaper.length === 0" style="color:#999; padding-left: 5px;">未找到匹配的固定试卷或者未登录</p>
+            </div>
+          </el-row>
+        </el-tab-pane>
         <!-- <el-tab-pane label="定时测评卷" name="timeLimitPaper">
           <el-row class="app-item-contain">
             <div style="padding-left: 15px">
