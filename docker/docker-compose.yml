@@ -61,8 +61,8 @@ services:
       - FORCE_HTTPS=1
       # - STATIC_CDN_HOST=cdn.oj.com
     ports:
-      - "0.0.0.0:80:8000"
-      - "0.0.0.0:443:1443"
+      - "0.0.0.0:8888:8000"
+      - "0.0.0.0:2443:1443"
 
   java-edu:
       image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/java_edu/java_edu:3.9.4
@@ -80,7 +80,8 @@ services:
       command:
           /bin/bash -c "java -Duser.timezone=Asia/Shanghai -jar -Dspring.profiles.active=prod /app/aikes-3.9.4.jar"
       ports:
-          - "8888:8888"
+          - "80:8082"   # HTTP重定向端口
+          - "443:8081"  # HTTPS主端口
       volumes:
           - "./release:/usr/local/aikes/release/"
           - "./log:/usr/log/aikes/"

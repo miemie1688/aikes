@@ -1,6 +1,7 @@
 #vue源码测试端口8888
 server:
-  port: 8888  ssl:
+  port: 8081
+  ssl:
     enabled: true
     key-store-type: JKS
     key-store: classpath:server.jks
@@ -17,7 +18,7 @@ server:
     enabled: true
     min-response-size: 1
   # 添加HTTP连接器用于重定向
-#  port.http: 8080
+  port.http: 8082
 
 #logging logback
 logging:
