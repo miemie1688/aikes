@@ -41,7 +41,7 @@ public class AuthController extends BaseWXApiController {
     public RestResponse bind(@Valid BindInfo model) {
         User user = userService.getUserByUserName(model.getUserName());
         if (user == null) {
-            return RestResponse.fail(2, "用户名或密码错误");
+            return RestResponse.fail(2, "用户名不存在");
         }
         boolean result = authenticationService.authUser(user, model.getUserName(), model.getPassword());
         if (!result) {

@@ -113,7 +113,7 @@ import Pagination from '@/components/Pagination'
 import QuestionShow from '../question/components/Show'
 import examPaperApi from '@/api/examPaper'
 import questionApi from '@/api/question'
-import coverPathApi from '@/api/admin/cover_path' // 🎯 导入封面路径API
+import coverPathApi from '@/api/cover_path' // 🎯 导入封面路径API
 import img1 from '@/assets/img1.png'
 import img2 from '@/assets/img2.png'
 import img3 from '@/assets/img3.png'

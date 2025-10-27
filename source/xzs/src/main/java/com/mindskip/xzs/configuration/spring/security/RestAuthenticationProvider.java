@@ -69,7 +69,7 @@ public class RestAuthenticationProvider implements AuthenticationProvider {
 
         com.mindskip.xzs.domain.User user = userService.getUserByUserName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("用户名或密码错误");
+            throw new UsernameNotFoundException("用户名不存在");
         }
 
         boolean result = authenticationService.authUser(user, username, password);
