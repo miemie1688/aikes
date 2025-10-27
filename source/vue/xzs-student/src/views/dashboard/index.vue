@@ -38,7 +38,7 @@
 
     <div class="tab-container">
       <el-tabs v-model="activeTab" type="card" class="dashboard-tabs">
-<el-tab-pane label="💡思维矩阵" name="resourceCollection">
+<el-tab-pane label="🚀思维矩阵" name="resourceCollection">
     <el-row class="app-item-contain">
         <div class="resource-collection-content">
 

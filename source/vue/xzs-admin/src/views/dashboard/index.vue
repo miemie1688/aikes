@@ -23,6 +23,7 @@
             <div class="card-panel-text">
               题目总数
             </div>
+            <!-- 注释 -->
             <count-to :start-val="0" :end-val="questionCount" :duration="3000" class="card-panel-num" v-loading="loading"/>
           </div>
         </div>
