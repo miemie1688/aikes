@@ -5,7 +5,7 @@
         <img src="@/assets/carousel/7.png" class="top-image1" />
       </el-col>
       <el-col :span="12" class="top-image-col">
-        <a href="https://aikes.ltd:8888" target="_blank" class="top-image-link"> 
+        <a href="https://aikes.ltd:2443" target="_blank" class="top-image-link"> 
           <img src="@/assets/carousel/img66.png" class="top-image1" />
         </a>
       </el-col>
@@ -48,7 +48,7 @@
             <div class="resource-links">
 
                 <div class="resource-item">
-                    <a href="https://aikes.ltd:8888" target="_blank" class="resource-link-item">
+                    <a href="https://aikes.ltd:2443" target="_blank" class="resource-link-item">
                         <span>🐬爱克思算法</span>
                     </a>
                 </div>
