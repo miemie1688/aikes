@@ -5,7 +5,7 @@
         <img src="@/assets/carousel/7.png" class="top-image1" />
       </el-col>
       <el-col :span="12" class="top-image-col">
-        <a href="https://aikes.ltd/" target="_blank" class="top-image-link"> 
+        <a href="https://aikes.ltd:8888" target="_blank" class="top-image-link"> 
           <img src="@/assets/carousel/img66.png" class="top-image1" />
         </a>
       </el-col>
@@ -38,145 +38,251 @@
 
     <div class="tab-container">
       <el-tabs v-model="activeTab" type="card" class="dashboard-tabs">
-     <el-tab-pane label="💡思维矩阵" name="resourceCollection">
-  <el-row class="app-item-contain">
-    <div class="resource-collection-content">
-      <h4 class="resource-category-title" style="color: var(--cartoon-pink); margin-top: 20px;">💡 AI & 机器人:</h4>
-      <div class="resource-links">
-        
-        <div class="resource-item">
-          <a href="https://www.deepseek.com/" target="_blank" class="resource-link-item">
-            <span>DeepSeek</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.kimi.com/" target="_blank" class="resource-link-item">
-            <span>💬 Kimi Chat AI</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.doubao.com/" target="_blank" class="resource-link-item">
-            <span>💬 豆包 AI</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://gemini.google.com/" target="_blank" class="resource-link-item">
-            <span>🚀 Gemini 2.5 Pro</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://chatgpt.com/" target="_blank" class="resource-link-item">
-            <span>GPT-5 (AI)</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.unifolm.com/" target="_blank" class="resource-link-item">
-            <span>🤖宇树科技开源社区</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.faxianai.com/" target="_blank" class="resource-link-item">
-            <span>更多AI资源发现</span>
-          </a>
-        </div>
-      </div>
-      
-      <h4 class="resource-category-title" style="color: var(--cartoon-blue);">🤖 竞赛 & 编程社区:</h4>
-      <div class="resource-links">
-        
-        <div class="resource-item">
-          <a href="https://aikes.ltd/" target="_blank" class="resource-link-item">
-            <span>🐬爱克思算法</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.luogu.com.cn/" target="_blank" class="resource-link-item">
-            <span>💻 洛谷 (Luogu)</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="http://ybt.ssoier.cn:8088/index.php" target="_blank" class="resource-link-item">
-            <span>🐍 C++信息学奥数一本通</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://py.ssoier.cn/" target="_blank" class="resource-link-item">
-            <span>🐍 Python 信息学奥数一本通</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://gesp.ccf.org.cn/" target="_blank" class="resource-link-item">
-            <span>🏆 GESP C++等级考试</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.noi.cn/" target="_blank" class="resource-link-item">
-            <span>🥇 NOI (信息学奥赛)</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.qceit.org.cn/bos/default.html?d=5443.820512563547" target="_blank" class="resource-link-item">
-            <span>🖥️ 中国电子协会考评中心</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.csdn.net/" target="_blank" class="resource-link-item">
-            <span>🌐 CSDN 开发者社区</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://www.runoob.com/" target="_blank" class="resource-link-item">
-            <span>📘 菜鸟教程 (Runoob)</span>
-          </a>
-        </div>
-      </div>
+<el-tab-pane label="💡思维矩阵" name="resourceCollection">
+    <el-row class="app-item-contain">
+        <div class="resource-collection-content">
 
-      <h4 class="resource-category-title" style="color: var(--cartoon-yellow); margin-top: 20px;">🔬 自然科学 & 实验平台:</h4>
-      <div class="resource-links">
-        
-        <div class="resource-item">
-          <a href="https://phet.colorado.edu/" target="_blank" class="resource-link-item">
-            <span>🧪科学仿真实验</span>
-          </a>
+           
+
+            <h4 class="resource-category-title" style="color: var(--cartoon-blue);">🧑‍💻 学习社区与竞赛平台:</h4>
+            <div class="resource-links">
+
+                <div class="resource-item">
+                    <a href="https://aikes.ltd:8888" target="_blank" class="resource-link-item">
+                        <span>🐬爱克思算法</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.luogu.com.cn/" target="_blank" class="resource-link-item">
+                        <span>💻 洛谷 (Luogu)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="http://ybt.ssoier.cn:8088/index.php" target="_blank" class="resource-link-item">
+                        <span>🐍 C++信息学奥数一本通</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://py.ssoier.cn/" target="_blank" class="resource-link-item">
+                        <span>🐍 Python 信息学奥数一本通</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://gesp.ccf.org.cn/" target="_blank" class="resource-link-item">
+                        <span>🏆 GESP C++等级考试</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.noi.cn/" target="_blank" class="resource-link-item">
+                        <span>🥇 NOI (信息学奥赛)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.qceit.org.cn/bos/default.html?d=5443.820512563547" target="_blank" class="resource-link-item">
+                        <span>🖥️ 中国电子协会考评中心</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.csdn.net/" target="_blank" class="resource-link-item">
+                        <span>🌐 CSDN 开发者社区</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.runoob.com/" target="_blank" class="resource-link-item">
+                        <span>📘 菜鸟教程 (Runoob)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.baidu.com/" target="_blank" class="resource-link-item">
+                        <span>🔍百度搜索</span>
+                    </a>
+                </div>
+            </div>
+
+            <h4 class="resource-category-title" style="color: var(--cartoon-green);">🖥️ 软件开发与设计工具:</h4>
+            <div class="resource-links">
+
+                <div class="resource-item">
+                    <a href="https://code.visualstudio.com/" target="_blank" class="resource-link-item">
+                        <span>Visual Studio Code (VS Code)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.jetbrains.com/idea/" target="_blank" class="resource-link-item">
+                        <span>IntelliJ IDEA (Java/Kotlin IDE)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="resource-link-item">
+                        <span>PyCharm (Python IDE)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://visualstudio.microsoft.com/" target="_blank" class="resource-link-item">
+                        <span>Visual Studio (C++/.NET IDE)</span>
+                    </a>
+                </div>
+
+                <div class="resource-item">
+                    <a href="https://github.com/" target="_blank" class="resource-link-item">
+                        <span>GitHub (全球 Git 仓库)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://gitee.com/" target="_blank" class="resource-link-item">
+                        <span>Gitee (码云 - 中国 Git)</span>
+                    </a>
+                </div>
+
+                <div class="resource-item">
+                    <a href="https://www.mysql.com/" target="_blank" class="resource-link-item">
+                        <span>MySQL (关系型数据库)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.postgresql.org/" target="_blank" class="resource-link-item">
+                        <span>PostgreSQL (关系型数据库)</span>
+                    </a>
+                </div>
+                
+                
+                
+                <div class="resource-item">
+                    <a href="https://tool.mintimate.cn/" target="_blank" class="resource-link-item">
+                        <span>⚙️ 在线工具箱</span>
+                    </a>
+                </div>
+            </div>
+
+            <h4 class="resource-category-title" style="color: var(--cartoon-orange);">⚙️ 电子硬件与工程设计:</h4>
+            <div class="resource-links">
+                
+                <div class="resource-item">
+                    <a href="https://lceda.cn/" target="_blank" class="resource-link-item">
+                        <span>💻 嘉立创EDA (EasyEDA)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.altium.com/" target="_blank" class="resource-link-item">
+                        <span>🖨️ Altium Designer (PCB 设计)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.arduino.cc/" target="_blank" class="resource-link-item">
+                        <span>⚙️ Arduino 官方社区</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://mindplus.cc/" target="_blank" class="resource-link-item">
+                        <span>🤖 Mind+ (图形化/硬件编程)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://mixly.cn/" target="_blank" class="resource-link-item">
+                        <span>🧱 Mixly (米思齐图形化编程)</span>
+                    </a>
+                </div>
+                <div class="resource-item">
+                    <a href="https://www.autodesk.com/" target="_blank" class="resource-link-item">
+                        <span>Autodesk (工程设计软件)</span>
+                    </a>
+                </div>
+            </div>
+
+ <h4 class="resource-category-title" style="color: var(--cartoon-pink); margin-top: 20px;">💡 AI 智能工具:</h4>
+            <div class="resource-links">
+                
+          
+                
+                <div class="resource-item">
+                    <a href="https://www.deepseek.com/" target="_blank" class="resource-link-item">
+                        <span>DeepSeek</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.kimi.com/" target="_blank" class="resource-link-item">
+                        <span>💬 Kimi Chat AI</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.doubao.com/" target="_blank" class="resource-link-item">
+                        <span>💬 豆包 AI</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://gemini.google.com/" target="_blank" class="resource-link-item">
+                        <span>🚀 Gemini 2.5 Pro</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://chatgpt.com/" target="_blank" class="resource-link-item">
+                        <span>GPT-5 (AI)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.coze.cn/" target="_blank" class="resource-link-item">
+                        <span>扣子空间（AI 应用开发）</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.unifolm.com/" target="_blank" class="resource-link-item">
+                        <span>🤖宇树科技开源社区</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://www.faxianai.com/" target="_blank" class="resource-link-item">
+                        <span>更多AI资源发现</span>
+                    </a>
+                </div>
+            </div>
+            <h4 class="resource-category-title" style="color: var(--cartoon-yellow); margin-top: 20px;">🔬 科学与人文学习资源:</h4>
+            <div class="resource-links">
+                
+                <div class="resource-item">
+                    <a href="https://phet.colorado.edu/" target="_blank" class="resource-link-item">
+                        <span>🧪 科学仿真实验 (PhET)</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://scratch.mit.edu/" target="_blank" class="resource-link-item">
+                        <span>🐾 Scratch 小猫编程</span>
+                    </a>
+                </div>
+                
+                <div class="resource-item">
+                    <a href="https://wordforest.cn/" target="_blank" class="resource-link-item">
+                        <span>☀ 英语学习乐园 (Wordforest)</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        
-        <div class="resource-item">
-          <a href="https://scratch.mit.edu/" target="_blank" class="resource-link-item">
-            <span>🐾 Scratch 小猫编程</span>
-          </a>
-        </div>
-        
-        <div class="resource-item">
-          <a href="https://tool.mintimate.cn/" target="_blank" class="resource-link-item">
-            <span>⚙️ 在线工具箱</span>
-          </a>
-        </div>
-      </div>
-      
-      <h4 class="resource-category-title" style="color: var(--cartoon-pink); margin-top: 20px;">📕人文社区:</h4>
-      <div class="resource-links">
-        <div class="resource-item">
-          <a href="https://wordforest.cn/" target="_blank" class="resource-link-item">
-            <span>☀英语学习乐园</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </el-row>
+    </el-row>
 </el-tab-pane>
 <el-tab-pane label="🏆思维实验室" name="fixedPaper">
           <el-row class="app-item-contain">
@@ -209,6 +315,7 @@
             </div>
           </el-row>
         </el-tab-pane>
+
         <!-- <el-tab-pane label="定时测评卷" name="timeLimitPaper">
           <el-row class="app-item-contain">
             <div style="padding-left: 15px">
