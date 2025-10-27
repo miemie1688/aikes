@@ -1,14 +1,13 @@
 #vue源码测试端口8888
 server:
-  port: 8888
-#  ssl:
-#    enabled: true
-#    key-store-type: JKS
-#    key-store: classpath:server.jks
-#    key-store-password: Yb3<@$EB#QwEQfAX
-#    key-alias: your-alias
-#    enabled-protocols: TLSv1.2,TLSv1.3
-#    ciphers: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+  port: 8888  ssl:
+    enabled: true
+    key-store-type: JKS
+    key-store: classpath:server.jks
+    key-store-password: Yb3<@$EB#QwEQfAX
+    key-alias: server
+    enabled-protocols: TLSv1.2,TLSv1.3
+    ciphers: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
   undertow:
     io-threads: 16
     worker-threads: 4000
@@ -17,7 +16,7 @@ server:
   compression:
     enabled: true
     min-response-size: 1
-#  # 添加HTTP连接器用于重定向
+  # 添加HTTP连接器用于重定向
 #  port.http: 8080
 
 #logging logback
