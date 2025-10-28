@@ -49,7 +49,7 @@ import createDefaultProfileByUserId from '@/api/profilesdefault'
 import axios from 'axios'; // 确保在你的项目中安装并正确导入了 axios
 
 
-const baseUrl = 'api/student/profiles';
+const baseUrl = '/api/student/profiles';
 export default {
   name: 'Login',
   data () {
