@@ -8,5 +8,6 @@
     "i-message": "/component/iView/message/index",
     "i-spin": "/component/iView/spin/index"
   },
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom"
 }
