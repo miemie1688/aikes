@@ -57,11 +57,13 @@ public class UserController extends BaseApiController {
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public RestResponse register(@RequestBody @Valid UserRegisterVM model) {
+// ⚠️ 注意: 最好将 RestResponse 的泛型改为包含 ID 的类型，这里我们假设返回一个 Integer ID
+    public RestResponse<Integer> register(@RequestBody @Valid UserRegisterVM model) {
         User existUser = userService.getUserByUserName(model.getUserName());
         if (null != existUser) {
             return new RestResponse<>(2, "用户已存在");
         }
+
         User user = modelMapper.map(model, User.class);
         String encodePwd = authenticationService.pwdEncode(model.getPassword());
         user.setUserUuid(UUID.randomUUID().toString());
@@ -71,11 +73,17 @@ public class UserController extends BaseApiController {
         user.setLastActiveTime(new Date());
         user.setCreateTime(new Date());
         user.setDeleted(false);
+
+        // 关键步骤 1: 插入后，user 对象的 id 属性会被数据库自动填充
         userService.insertByFilter(user);
+
+        // 记录事件日志
         UserEventLog userEventLog = new UserEventLog(user.getId(), user.getUserName(), user.getRealName(), new Date());
         userEventLog.setContent("欢迎 " + user.getUserName() + " 注册来到爱克斯考试系统");
         eventPublisher.publishEvent(new UserEvent(userEventLog));
-        return RestResponse.ok();
+
+        // 关键步骤 2: 返回新用户的 ID
+        return RestResponse.ok(user.getId());
     }
 
 

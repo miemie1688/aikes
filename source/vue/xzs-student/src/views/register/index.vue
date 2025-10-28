@@ -45,7 +45,11 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import registerApi from '@/api/register'
+import createDefaultProfileByUserId from '@/api/profilesdefault'
+import axios from 'axios'; // 确保在你的项目中安装并正确导入了 axios
 
+
+const baseUrl = 'api/student/profiles';
 export default {
   name: 'Login',
   data () {
@@ -62,18 +66,29 @@ export default {
       let _this = this
       registerApi.register(this.loginForm).then(function (result) {
         if (result && result.code === 1) {
+//调用
+// createDefaultProfileByUserId(result.response)
+axios.post(`${baseUrl}/default-by-user/${result.response}`, null) 
+    .then(response => {
+        console.log(`成功为用户 ${userId} 创建档案:`, response.data);
+    })
+    .catch(error => {
+        console.error(`创建档案失败:`, error);
+    });
           _this.$router.push({ path: '/login' })
         } else {
           _this.$message.error(result.message)
         }
       })
     },
+    
     ...mapMutations('user', ['setUserName'])
   },
   computed: {
     ...mapState('enumItem', {
       levelEnum: state => state.user.levelEnum
-    })
+    }),
+    
   }
 }
 </script>

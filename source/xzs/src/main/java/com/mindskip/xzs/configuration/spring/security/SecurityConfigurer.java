@@ -84,6 +84,8 @@ public class SecurityConfigurer {
                     .and().authenticationProvider(restAuthenticationProvider)
                     .authorizeRequests()
                     .antMatchers(securityIgnoreUrls.toArray(ignores)).permitAll()
+                    .antMatchers("/api/student/profiles").permitAll()
+                    .antMatchers("/api/student/profiles/**").permitAll()
                     .antMatchers("/api/admin/**").hasRole(RoleEnum.ADMIN.getName())
                     .antMatchers("/api/student/**").hasRole(RoleEnum.STUDENT.getName())
                     .anyRequest().permitAll()

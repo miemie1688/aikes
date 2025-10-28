@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mindskip.xzs.repository.UserProfileMapper">
+
+    <resultMap id="BaseResultMap" type="com.mindskip.xzs.viewmodel.student.user.UserProfile">
+        <id column="id" property="id"/>
+
+        <result column="acm_problems_status" property="acmProblemsStatus"
+                javaType="java.util.Map"
+                jdbcType="OTHER"
+                typeHandler="com.mindskip.xzs.utility.mybatis.JsonbTypeHandler"/>
+
+        <result column="avatar" property="avatar"/>
+        <result column="blog" property="blog"/>
+        <result column="mood" property="mood"/>
+        <result column="accepted_number" property="acceptedNumber"/>
+        <result column="submission_number" property="submissionNumber"/>
+        <result column="github" property="github"/>
+        <result column="school" property="school"/>
+        <result column="major" property="major"/>
+        <result column="user_id" property="userId"/>
+        <result column="total_score" property="totalScore"/>
+
+        <result column="oi_problems_status" property="oiProblemsStatus"
+                javaType="java.util.Map"
+                jdbcType="OTHER"
+                typeHandler="com.mindskip.xzs.utility.mybatis.JsonbTypeHandler"/>
+
+        <result column="real_name" property="realName"/>
+        <result column="language" property="language"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, acm_problems_status, avatar, blog, mood, accepted_number, submission_number,
+        github, school, major, user_id, total_score, oi_problems_status, real_name, language
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_profile (
+            acm_problems_status, avatar, blog, mood, accepted_number, submission_number,
+            github, school, major, user_id, total_score, oi_problems_status, real_name, language
+        ) VALUES (
+                     #{acmProblemsStatus, jdbcType=OTHER, typeHandler=com.mindskip.xzs.utility.mybatis.JsonbTypeHandler},
+                     #{avatar},
+                     #{blog},
+                     #{mood},
+                     #{acceptedNumber},
+                     #{submissionNumber},
+                     #{github},
+                     #{school},
+                     #{major},
+                     #{userId},
+                     #{totalScore},
+                     #{oiProblemsStatus, jdbcType=OTHER, typeHandler=com.mindskip.xzs.utility.mybatis.JsonbTypeHandler},
+                     #{realName},
+                     #{language}
+                 )
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user_profile
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user_profile
+    </select>
+
+    <update id="update">
+        UPDATE user_profile
+        SET
+            acm_problems_status = #{acmProblemsStatus, jdbcType=OTHER, typeHandler=com.mindskip.xzs.utility.mybatis.JsonbTypeHandler},
+            avatar = #{avatar},
+            blog = #{blog},
+            mood = #{mood},
+            accepted_number = #{acceptedNumber},
+            submission_number = #{submissionNumber},
+            github = #{github},
+            school = #{school},
+            major = #{major},
+            user_id = #{userId},
+            total_score = #{totalScore},
+            oi_problems_status = #{oiProblemsStatus, jdbcType=OTHER, typeHandler=com.mindskip.xzs.utility.mybatis.JsonbTypeHandler},
+            real_name = #{realName},
+            language = #{language}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM user_profile
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByUserId">
+        DELETE FROM user_profile
+        WHERE user_id = #{userId}
+    </delete>
+
+</mapper>
