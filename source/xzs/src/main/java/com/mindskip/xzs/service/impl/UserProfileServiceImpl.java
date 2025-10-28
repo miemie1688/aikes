@@ -5,14 +5,14 @@ import com.mindskip.xzs.repository.UserProfileMapper;
 import com.mindskip.xzs.viewmodel.student.user.UserProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.mindskip.xzs.service.UserProfileService;
 import java.util.List;
 
 /**
  * 用户配置服务实现类
  */
 @Service // 标记为 Spring Bean
-public class UserProfileServiceImpl implements com.example.demo.service.UserProfileService {
+public class UserProfileServiceImpl implements UserProfileService {
 
     private final UserProfileMapper userProfileMapper;
 

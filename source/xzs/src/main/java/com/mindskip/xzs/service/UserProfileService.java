@@ -1,4 +1,5 @@
-package com.example.demo.service;
+package com.mindskip.xzs.service;
+
 
 
 import com.mindskip.xzs.viewmodel.student.user.UserProfile;

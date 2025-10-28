@@ -1,10 +1,10 @@
 package com.mindskip.xzs.controller.student;
 
+import com.mindskip.xzs.service.UserProfileService;
 import com.mindskip.xzs.viewmodel.student.user.UserProfile;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.util.List;
 import java.util.HashMap; // 引入 HashMap 用于设置默认值
 
 @RestController
@@ -12,10 +12,10 @@ import java.util.HashMap; // 引入 HashMap 用于设置默认值
 public class UserProfileController {
 
     // 注入接口
-    private final com.example.demo.service.UserProfileService userProfileService;
+    private final UserProfileService userProfileService;
 
     // 构造器注入
-    public UserProfileController(com.example.demo.service.UserProfileService userProfileService) {
+    public UserProfileController(UserProfileService userProfileService) {
         this.userProfileService = userProfileService;
     }
 

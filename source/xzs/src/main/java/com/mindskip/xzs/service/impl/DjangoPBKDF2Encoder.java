@@ -4,7 +4,7 @@ package com.mindskip.xzs.service.impl;
 import com.mindskip.xzs.service.PasswordEncoderService;
 
 
-;
+
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
