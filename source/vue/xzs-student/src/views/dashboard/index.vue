@@ -408,9 +408,20 @@
             </div>
           </el-row>
         </el-tab-pane> -->
-      </el-tabs>
-    </div>
-  </div>
+      <</el-tabs>
+ </div>
+ 
+<footer class="app-footer">
+<div class="footer-content">
+<p>
+ Copyright &copy; 2024 湖州爱克斯科技培训有限公司 All Rights Reserved.
+ </p>
+<a href="http://beian.miit.gov.cn/" target="_blank" class="icp-link">
+ 浙ICP备2025204178号
+ </a>
+ </div>
+</footer>
+</div>
 </template>
 
 <script>
@@ -553,7 +564,47 @@ export default {
   --cartoon-bg: #f5f6fa;
   --cartoon-card: #fff6fb;
 }
+/* 页脚样式 */
+.app-footer {
+ width: 100%;
+ padding: 25px 0;
+ margin-top: 30px; /* 与主内容区域保持间距 */
+ background: #f0f0ff; /* 浅色背景，与主背景略有不同 */
+ color: #555;
+ text-align: center;
+ font-size: 15px;
+border-top: 3px solid var(--cartoon-blue); /* 顶部蓝色科技感线条 */
+border-radius: 0 0 24px 24px; /* 匹配容器底部圆角 */
+ box-shadow: 0 -4px 15px 0 rgba(80, 150, 255, 0.05);
+}
 
+.footer-content {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 15px;
+}
+
+.app-footer p {
+ margin: 0;
+ padding: 0;
+ font-weight: 500;
+}
+
+.icp-link {
+ color: var(--cartoon-purple); /* 备案号使用紫色强调 */
+ text-decoration: none;
+ font-weight: 700;
+ border-bottom: 2px dotted var(--cartoon-pink); /* 粉色虚线 */
+ padding-bottom: 2px;
+ transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.icp-link:hover {
+ color: var(--cartoon-pink);
+ border-bottom-color: var(--cartoon-purple);
+}
 .resource-link-item {
     text-decoration: none; /* 移除默认下划线 */
     color: inherit; /* 继承父元素的颜色，保持和普通文字一致 */

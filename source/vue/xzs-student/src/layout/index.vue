@@ -97,7 +97,7 @@
 
     <div class="foot-copyright">
       
-      <span>@湖州爱克斯科技</span>
+      <!-- <span>@湖州爱克斯科技</span> -->
     </div>
     
   </el-container>
