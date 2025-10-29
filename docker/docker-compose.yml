@@ -9,7 +9,7 @@ services:
       - ./data/redis:/data
 
   oj-postgres:
-    image: postgres:10-alpine
+    image: crpi-al80mno0m25s5teh.cn-shanghai.personal.cr.aliyuncs.com/java_edu/ai_postgres:10.1
     container_name: oj-postgres
     restart: always
     volumes:
