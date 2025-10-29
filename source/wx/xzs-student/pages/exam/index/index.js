@@ -85,7 +85,7 @@ Page({
       _this.setData({
         spinShow: false
       });
-      app.message(e, 'error')
+    //  app.message(e, 'error')
     })
   }
 })

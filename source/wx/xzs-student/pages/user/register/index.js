@@ -33,7 +33,7 @@ Page({
         });
         if (res.code == 1) {
           const userId = res.response; 
-          const baseUrl = 'https://aikes.ltd'; 
+          const baseUrl = 'http://localhost:8888'; 
           
           wx.request({
             // 【已修正】使用反引号 (`) 确保变量被解析

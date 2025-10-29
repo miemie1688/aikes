@@ -5,7 +5,7 @@ const mtjwxsdk = require('./utils/mtj-wx-sdk.js');
 
 App({
   globalData: {
-    baseAPI: "https://aikes.ltd",
+    baseAPI: "http://localhost:8888",
     pageSize: 20
   },
   onLaunch: function() {
@@ -20,13 +20,16 @@ App({
             }).then(res => {
               if (res.code == 1) {
                 wx.setStorageSync('token', res.response)
-                wx.reLaunch({
-                  url: '/pages/index/index',
-                });
+                // 移除强制跳转首页，避免全局拦截
+                // wx.reLaunch({
+                //   url: '/pages/index/index',
+                // });
               } else if (res.code == 2) {
-                wx.reLaunch({
-                  url: '/pages/user/bind/index',
-                });
+                // 移除强制跳转登录页，避免全局拦截
+                // wx.reLaunch({
+                //   url: '/pages/user/bind/index',
+                // });
+                _this.message('请先登录', 'warning')
               } else {
                 _this.message(res.message, 'error')
               }
@@ -79,12 +82,22 @@ App({
               success(result) {
                 resolve(result.data);
                 return true;
+              },
+              fail(error) {
+                reject('刷新token后请求失败');
+                return false;
+              },
+              complete() {
+                wx.hideNavigationBarLoading();
               }
             })
           } else if (res.data.code === 401) {
-            wx.reLaunch({
-              url: '/pages/user/bind/index',
-            });
+            // 移除强制跳转登录页，避免全局拦截
+            // wx.reLaunch({
+            //   url: '/pages/user/bind/index',
+            // });
+            _this.message('登录已过期，请重新登录', 'warning')
+            reject('登录已过期，请重新登录');
             return false;
           } else if (res.data.code === 500) {
             reject(res.data.message)
