@@ -34,7 +34,11 @@
 
 <view>
   <i-cell-group i-class="my-group-margin">
-    <i-cell title="退出账号" bind:click="logOut">
+    <!-- 根据登录状态条件渲染 -->
+    <i-cell wx:if="{{isLoggedIn}}" title="退出账号" bind:click="logOut">
+      <i-icon type="flashlight_fill" slot="icon" size="20" />
+    </i-cell>
+    <i-cell wx:else title="登录账号" bind:click="login">
       <i-icon type="flashlight_fill" slot="icon" size="20" />
     </i-cell>
   </i-cell-group>

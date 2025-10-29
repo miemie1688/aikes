@@ -77,7 +77,7 @@ public class UserController extends BaseWXApiController {
         UserEventLog userEventLog = new UserEventLog(user.getId(), user.getUserName(), user.getRealName(), new Date());
         userEventLog.setContent("欢迎 " + user.getUserName() + " 注册来到爱克斯考试系统");
         eventPublisher.publishEvent(new UserEvent(userEventLog));
-        return RestResponse.ok();
+        return RestResponse.ok(user.getId());
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

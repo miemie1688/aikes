@@ -2,7 +2,8 @@ const app = getApp()
 Page({
   data: {
     spinShow: false,
-    info: {}
+    info: {},
+    isLoggedIn: false
   },
 
   onLoad: function(options) {
@@ -13,10 +14,26 @@ Page({
     _this.setData({
       spinShow: true
     });
+    
+    // 检查本地是否有token来判断登录状态
+    const token = wx.getStorageSync('token');
+    if (!token || token === '') {
+      _this.setData({
+        isLoggedIn: false,
+        spinShow: false
+      });
+      return;
+    }
+    
     app.formPost('/api/wx/student/user/current', null).then(res => {
       if (res.code == 1) {
         _this.setData({
-          info: res.response
+          info: res.response,
+          isLoggedIn: true
+        });
+      } else {
+        _this.setData({
+          isLoggedIn: false
         });
       }
       _this.setData({
@@ -24,10 +41,16 @@ Page({
       });
     }).catch(e => {
       _this.setData({
-        spinShow: false
+        spinShow: false,
+        isLoggedIn: false
       });
-      app.message(e, 'error')
     })
+  },
+  
+  login() {
+    wx.navigateTo({
+      url: '/pages/user/bind/index',
+    });
   },
   logOut() {
     let _this = this
@@ -37,9 +60,11 @@ Page({
     app.formPost('/api/wx/student/auth/unBind', null).then(res => {
       if (res.code == 1) {
         wx.setStorageSync('token', '')
-        wx.reLaunch({
-          url: '/pages/user/bind/index',
+        _this.setData({
+          isLoggedIn: false,
+          info: {}
         });
+        app.message('退出成功', 'success')
       }
       _this.setData({
         spinShow: false
