@@ -26,4 +26,8 @@ public class ReserveServiceImpl implements ReserveService {
     public Integer insertReserve(ReservationRequest reservationRequest) {
         return reserveMapper.insertReserve(reservationRequest);
     }
+    @Override
+    public Integer updateReserveStatus(ReservationRequest reservationRequest) {
+        return reserveMapper.updateReserveStatus(reservationRequest);
+    }
 }

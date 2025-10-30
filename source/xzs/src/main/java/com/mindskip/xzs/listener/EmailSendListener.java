@@ -5,6 +5,9 @@ import com.mindskip.xzs.event.OnRegistrationCompleteEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 /**
@@ -15,11 +18,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EmailSendListener implements ApplicationListener<OnRegistrationCompleteEvent> {
-
+    private static final Logger log = (Logger) LoggerFactory.getLogger(EmailSendListener.class);
     @Override
     @NonNull
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
         User user = event.getUser();
-        System.out.println("User register Email sender :" + user.getUserName());
+        log.info("User register Email sender :" + user.getUserName());
     }
 }

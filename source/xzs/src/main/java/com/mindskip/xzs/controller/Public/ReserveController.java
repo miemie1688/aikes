@@ -10,7 +10,8 @@ import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.mindskip.xzs.viewmodel.Public.ReservationRequest;
 
 /**
@@ -23,7 +24,7 @@ public class ReserveController {
 
     private final MailUtil mailUtil;
     private final ReserveService reserveService;
-
+    private static final Logger log = (Logger) LoggerFactory.getLogger(ReserveController.class);
     // 构造函数注入 MailUtil
     public ReserveController(MailUtil mailUtil, ReserveService reserveService) {
         this.mailUtil = mailUtil;
@@ -40,14 +41,14 @@ public class ReserveController {
     @PostMapping("/submit")
     public RestResponse<Map<String, Object>> submitReservation(@RequestBody ReservationRequest reservationRequest) {
         // 1. 打印接收到的数据
-        System.out.println("====== 收到新的预约请求 ======");
-        System.out.println("预约 ID: " + reservationRequest.getId());
-        System.out.println("课程 ID: " + reservationRequest.getCourseId());
-        System.out.println("课程名称: " + reservationRequest.getCourseName());
-        System.out.println("姓名: " + reservationRequest.getName());
-        System.out.println("电话: " + reservationRequest.getPhone());
-        System.out.println("预约时间: " + reservationRequest.getAppointment());
-        System.out.println("============================");
+        log.info("====== 收到新的预约请求 ======");
+        log.info("预约 ID: " + reservationRequest.getId());
+        log.info("课程 ID: " + reservationRequest.getCourseId());
+        log.info("课程名称: " + reservationRequest.getCourseName());
+        log.info("姓名: " + reservationRequest.getName());
+        log.info("电话: " + reservationRequest.getPhone());
+        log.info("预约时间: " + reservationRequest.getAppointment());
+        log.info("============================");
 
         // 2. ***** 核心逻辑：将数据保存到数据库 *****
         Integer insertReserve = reserveService.insertReserve(reservationRequest);
@@ -68,9 +69,9 @@ public class ReserveController {
                 reservationRequest.getPhone(),
                 reservationRequest.getAppointment());
 
-        // 假设通知邮件发送给管理员
-        mailUtil.sendSimpleMail("410052065@qq.com", subject, content);
-        System.out.println("管理员通知邮件发送成功");
+        // 假设通知邮件发送给管理员410052065@qq.com
+        mailUtil.sendSimpleMail("gl11223@qq.com", subject, content);
+        log.info("管理员通知邮件发送成功");
 
         // 4. 返回成功响应（小程序需要 HTTP 200 状态码和 code=0 标记成功）
         //return RestResponse.ok(userVm);
@@ -82,5 +83,6 @@ public class ReserveController {
         // 使用 RestResponse.ok(data) 返回包含 code 和 message 的 Map
         return RestResponse.ok(responseData);
     }
+
 
 }

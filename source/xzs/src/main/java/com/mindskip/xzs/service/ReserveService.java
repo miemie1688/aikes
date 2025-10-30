@@ -22,4 +22,10 @@ public interface ReserveService {
      * @return 新增结果
      */
     Integer insertReserve(ReservationRequest reservationRequest);
+    /**
+     * 更新预约状态
+     * @param reservationRequest 预约请求
+     * @return 更新结果
+     */
+    Integer updateReserveStatus(ReservationRequest reservationRequest);
 }

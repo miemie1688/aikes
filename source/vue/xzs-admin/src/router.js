@@ -1,3 +1,5 @@
+// src/router/index.js
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout'
@@ -40,10 +42,7 @@ const constantRoutes = [
     path: '/user',
     component: Layout,
     name: 'UserPage',
-    meta: {
-      title: '用户管理',
-      icon: 'users'
-    },
+    meta: { title: '用户管理', icon: 'users' },
     children: [
       {
         path: 'student/list',
@@ -77,10 +76,7 @@ const constantRoutes = [
     path: '/exam',
     component: Layout,
     name: 'ExamPage',
-    meta: {
-      title: '卷题管理',
-      icon: 'exam'
-    },
+    meta: { title: '卷题管理', icon: 'exam' },
     children: [
       {
         path: 'paper/list',
@@ -142,10 +138,7 @@ const constantRoutes = [
     path: '/task',
     component: Layout,
     name: 'TaskPage',
-    meta: {
-      title: '任务管理',
-      icon: 'task'
-    },
+    meta: { title: '任务管理', icon: 'task' },
     alwaysShow: true,
     children: [
       {
@@ -166,10 +159,7 @@ const constantRoutes = [
     path: '/education',
     component: Layout,
     name: 'EducationPage',
-    meta: {
-      title: '教育管理',
-      icon: 'education'
-    },
+    meta: { title: '教育管理', icon: 'education' },
     alwaysShow: true,
     children: [
       {
@@ -187,14 +177,27 @@ const constantRoutes = [
       }
     ]
   },
+  // ✅ 新增的预约管理模块
+  {
+    path: '/reserve',
+    component: Layout,
+    name: 'ReservePage',
+    meta: { title: '预约管理', icon: 'calendar' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/views/reserve/list/reserve'),
+        name: 'ReserveListPage',
+        meta: { title: '预约列表', noCache: true }
+      }
+    ]
+  },
   {
     path: '/answer',
     component: Layout,
     name: 'AnswerPage',
-    meta: {
-      title: '成绩管理',
-      icon: 'answer'
-    },
+    meta: { title: '成绩管理', icon: 'answer' },
     alwaysShow: true,
     children: [
       {
@@ -209,10 +212,7 @@ const constantRoutes = [
     path: '/message',
     component: Layout,
     name: 'MessagePage',
-    meta: {
-      title: '消息中心',
-      icon: 'message'
-    },
+    meta: { title: '消息中心', icon: 'message' },
     alwaysShow: true,
     children: [
       {
@@ -233,10 +233,7 @@ const constantRoutes = [
     path: '/log',
     component: Layout,
     name: 'LogPage',
-    meta: {
-      title: '日志中心',
-      icon: 'log'
-    },
+    meta: { title: '日志中心', icon: 'log' },
     alwaysShow: true,
     children: [
       {
@@ -260,7 +257,8 @@ const constantRoutes = [
       }
     ]
   },
-  { path: '*',
+  {
+    path: '*',
     hidden: true,
     component: () => import('@/views/error-page/404'),
     meta: { title: '404', noCache: true }

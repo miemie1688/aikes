@@ -1,7 +1,7 @@
 Page({
   data: {
 
-    BASE_URL: 'https://aikes.ltd', 
+    BASE_URL: 'http://localhost:8888', 
     
     // 表单数据
     formData: {
@@ -175,7 +175,7 @@ Page({
         wx.hideLoading();
         console.error('预约请求失败', err);
         wx.showToast({
-          title: '网络错误，请检查后端服务是否运行在 https://aikes.ltd',
+          title: '网络错误，请检查后端服务是否运行在 http://localhost:8888',
           icon: 'none',
           duration: 3000
         });

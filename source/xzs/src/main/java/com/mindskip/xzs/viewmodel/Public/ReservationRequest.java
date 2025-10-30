@@ -17,8 +17,16 @@ public class ReservationRequest {
     private LocalDateTime appointment; // YYYY-MM-DD HH:mm:ss 格式
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime; // YYYY-MM-DD HH:mm:ss 格式
-
+private String status;
     // Getters and Setters
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;

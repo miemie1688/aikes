@@ -62,13 +62,13 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
      * 生成 Django 格式的 PBKDF2-SHA256 哈希字符串 (可指定迭代次数)。
      */
     public String encode(String rawPassword, int iterations) {
-        System.out.println("--- 开始生成哈希密码 ---");
+        log.info("--- 开始生成哈希密码 ---");
         try {
             // 1. 生成随机盐 (Salt)
             byte[] saltBytes = new byte[SALT_LENGTH_BYTES];
             secureRandom.nextBytes(saltBytes);
             String salt = Base64.getEncoder().withoutPadding().encodeToString(saltBytes);
-            System.out.println("💡💡💡💡💡💡💡💡💡💡生成的盐 (Salt): " + Arrays.toString(saltBytes));
+            log.info("💡💡💡💡💡💡💡💡💡💡生成的盐 (Salt): " + Arrays.toString(saltBytes));
             log.info("生成的盐 (Salt): " + Arrays.toString(saltBytes));
             // 将盐编码为 Base64 字符串，不使用填充
             // 注意：此处省略了原始代码中的兼容性注释，直接采用Base64无填充编码
@@ -76,7 +76,7 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
            // byte[] b64Bytes = Base64.getEncoder().encode(salt.getBytes());
             // 2. 计算 PBKDF2 哈希
 
-            System.out.println("💡💡💡💡💡💡💡💡💡💡加密的盐 (Salt): " + Arrays.toString(salt.getBytes(StandardCharsets.UTF_8)));
+            log.info("💡💡💡💡💡💡💡💡💡💡加密的盐 (Salt): " + Arrays.toString(salt.getBytes(StandardCharsets.UTF_8)));
             log.info("加密的盐 (Salt): " + Arrays.toString(salt.getBytes(StandardCharsets.UTF_8)));
             byte[] hashBytes = pbkdf2(
                     rawPassword.toCharArray(),
@@ -98,7 +98,7 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
 
             System.out.printf("生成结果: [Iterations: %d, Salt: %s, Hash: %s...]\n",
                     iterations, salt, encodedHash.substring(0, Math.min(30, encodedHash.length())));
-            System.out.println("--- 哈希密码生成结束 ---");
+            log.info("--- 哈希密码生成结束 ---");
 
             return hashedPassword;
         } catch (Exception e) {
@@ -113,9 +113,9 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
      */
     @Override
     public boolean matches(String rawPassword, String hashedPassword) {
-        System.out.println("\n--- 开始验证密码 ---");
-        System.out.println("原始密码 (rawPassword): " + rawPassword);
-        System.out.println("目标哈希 (hashedPassword): " + hashedPassword);
+        log.info("\n--- 开始验证密码 ---");
+        log.info("原始密码 (rawPassword): " + rawPassword);
+        log.info("目标哈希 (hashedPassword): " + hashedPassword);
         log.info("目标哈希 (hashedPassword): " + hashedPassword);
         String[] parts = parse(hashedPassword);
         if (parts == null) {
@@ -128,7 +128,7 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             String encodedHash = parts[2];
 
 
-            System.out.println("💡💡💡💡💡💡💡💡💡💡解密的盐 (Salt): " + Arrays.toString(salt.getBytes(StandardCharsets.UTF_8)));
+            log.info("💡💡💡💡💡💡💡💡💡💡解密的盐 (Salt): " + Arrays.toString(salt.getBytes(StandardCharsets.UTF_8)));
             // 计算原始密码的哈希值
             log.info("salt: {}", salt);
             log.info("解密的盐 (Salt): 通过salt.getBytes(StandardCharsets.UTF_8)编码" + Arrays.toString(salt.getBytes(StandardCharsets.UTF_8)));
@@ -149,12 +149,12 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
             log.info("可能存在的另外一组哈希值: {}", Base64.getEncoder().encodeToString(testhash));
             // 将计算出的字节哈希值进行 Base64 编码
             String computedHash = Base64.getEncoder().encodeToString(hash);
-            System.out.println("💡💡💡💡💡解密的哈希 (Hash): " + computedHash);
+            log.info("💡💡💡💡💡解密的哈希 (Hash): " + computedHash);
             log.info("解密的哈希 (Hash): " + computedHash);
             // 使用常量时间比较以防止时序攻击 (这里为了简洁，仍使用 equals，但生产环境应优化)
             boolean result = computedHash.equals(encodedHash);
-            System.out.println("比较结果: " + (result ? "匹配" : "不匹配"));
-            System.out.println("--- 密码验证结束 ---");
+            log.info("比较结果: " + (result ? "匹配" : "不匹配"));
+            log.info("--- 密码验证结束 ---");
             return result;
 
         } catch (NumberFormatException e) {
@@ -175,21 +175,21 @@ public class DjangoPBKDF2Encoder implements PasswordEncoderService {
      */
     @Override
     public String[] parse(String hashedPassword) {
-        System.out.println("\n--- 开始解析哈希密码 ---");
+        log.info("\n--- 开始解析哈希密码 ---");
         if (hashedPassword == null || !hashedPassword.startsWith(ALGORITHM_PREFIX + "$")) {
-            System.out.println("解析失败: 格式不正确或为空。");
+            log.info("解析失败: 格式不正确或为空。");
             return null;
         }
 
         String[] parts = hashedPassword.split("\\$");
         if (parts.length != 4) {
-            System.out.println("解析失败: 部分数量不正确，期望 4 部分，实际 " + parts.length + " 部分。");
+            log.info("解析失败: 部分数量不正确，期望 4 部分，实际 " + parts.length + " 部分。");
             return null;
         }
 
         System.out.printf("解析结果: [算法: %s, 迭代次数: %s, 盐: %s]\n",
                 parts[0], parts[1], parts[2]);
-        System.out.println("--- 哈希密码解析结束 ---");
+        log.info("--- 哈希密码解析结束 ---");
 
         // 返回 [迭代次数, 盐, 哈希值]
         return new String[]{parts[1], parts[2], parts[3]};

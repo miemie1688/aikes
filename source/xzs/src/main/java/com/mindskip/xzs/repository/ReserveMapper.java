@@ -16,4 +16,6 @@ public interface ReserveMapper {
     Integer deleteReserve(Integer id);
 
     Integer insertReserve(ReservationRequest reservationRequest);
+    // 更新预约状态
+    Integer updateReserveStatus(ReservationRequest reservationRequest);
 }
