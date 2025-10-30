@@ -2830,3 +2830,18 @@ ALTER TABLE ONLY public.user_profile
 -- PostgreSQL database dump complete
 --
 
+CREATE TABLE t_reservation (
+    -- 主键 ID，自动创建序列并自增，存储为 INTEGER (4 字节)
+    id SERIAL PRIMARY KEY,
+    course_id VARCHAR(50) NOT NULL,
+    course_name VARCHAR(255) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+
+    -- 预约时间，通常使用 TIMESTAMP 或 TIMESTAMP WITH TIME ZONE
+    -- 假设您只需要日期和时间，可以使用 TIMESTAMP WITHOUT TIME ZONE
+    appointment TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+
+    -- 记录创建时间，自动填充当前时间
+    create_time TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

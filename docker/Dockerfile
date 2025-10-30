@@ -20,7 +20,7 @@ RUN mkdir -p ${LOG_PATH}
 EXPOSE 8081
 
 # 复制本地 Maven/Gradle 打好的 jar 包
-COPY ./aikes-3.9.4.jar aikes-3.9.4.jar
+COPY ./aikes-3.9.5.jar aikes-3.9.5.jar
 
 # 启动命令
-ENTRYPOINT ["java", "-Duser.timezone=Asia/Shanghai", "-jar", "/app/aikes-3.9.4.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=Asia/Shanghai", "-jar", "/app/aikes-3.9.5.jar"]
