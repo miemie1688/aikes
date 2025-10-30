@@ -28,7 +28,7 @@
     </i-collapse>
   </i-panel> -->
 
-  <i-panel title="固定试卷">
+  <i-panel title="💡思维实验室">
     <i-cell-group>
       <block wx:if="{{fixedPaper.length > 0}}">
         <i-cell 
@@ -45,7 +45,7 @@
       </view>
     </i-cell-group>
   </i-panel>
-  <i-panel title="时段试卷">
+  <!-- <i-panel title="时段试卷">
     <i-cell-group>
       <block wx:if="{{timeLimitPaper.length > 0}}">
         <i-cell 
@@ -62,7 +62,7 @@
         暂无相关内容，请检查登陆状态后重试
       </view>
     </i-cell-group>
-  </i-panel>
+  </i-panel> -->
   <i-spin size="large" fix wx:if="{{ spinShow }}"></i-spin>
   <i-message id="message" />
 </view>

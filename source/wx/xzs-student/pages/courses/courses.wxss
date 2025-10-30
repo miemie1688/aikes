@@ -1,0 +1,212 @@
+/* 移除之前的 .container 样式，使用新的分栏样式 */
+.container-split {
+  display: flex;
+  height: 100vh; /* 确保占据整个视口高度 */
+  box-sizing: border-box;
+}
+
+/* 左侧边栏样式 */
+.sidebar {
+  width: 180rpx; /* 侧边栏宽度 */
+  background-color: #f0f0f0;
+  border-right: 1rpx solid #ddd;
+  height: 100%;
+}
+
+.sidebar-item {
+  padding: 30rpx 15rpx;
+  font-size: 28rpx;
+  color: #333;
+  border-bottom: 1rpx solid #e9e9e9;
+  position: relative;
+}
+
+.sidebar-item.active {
+  background-color: #ffffff; /* 选中时背景变白 */
+  color: #007bff; /* 选中时字体变蓝 */
+  font-weight: bold;
+  border-right: none;
+}
+
+.sidebar-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6rpx; /* 左侧蓝色指示条 */
+  background-color: #007bff;
+}
+
+/* 右侧内容区域样式 */
+.content-area {
+  flex: 1; /* 占据剩余宽度 */
+  padding: 30rpx;
+  background-color: #fff;
+  overflow-y: scroll; /* 确保内容可以滚动 */
+  height: 100%;
+}
+
+/* 课程详情卡片样式 */
+.course-detail-card {
+  /* 确保详情卡片在右侧居中或正常显示 */
+}
+
+/* 详情页组件样式 (根据原卡片样式微调，添加 -detail 后缀以区分) */
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.detail-name {
+  font-size: 38rpx;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.detail-age-tag {
+  background-color: #e6f7ff;
+  color: #007bff;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.detail-slogan {
+  font-size: 32rpx;
+  color: #ff5722;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+
+.detail-content-box {
+  padding: 20rpx 0;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 30rpx;
+}
+
+.content-text-detail {
+  font-size: 30rpx;
+  color: #444;
+  line-height: 1.6;
+}
+
+.class-size-detail {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 15rpx;
+  padding-top: 10rpx;
+  border-top: 1rpx dashed #ccc;
+}
+
+.detail-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+}
+
+.price-info-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-price-detail {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+/* ... (保留之前的样式) ... */
+
+/* 弱化后的原价信息 */
+.original-price-note {
+  font-size: 26rpx;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20rpx;
+  padding-top: 15rpx;
+  border-top: 1rpx dashed #eee;
+}
+.original-price-detail-weak {
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+
+/* ====== 试听促销模块样式 START ====== */
+.trial-promo-box {
+  display: flex;
+  justify-content: space-around;
+  margin: 30rpx 0;
+  padding: 20rpx 0;
+  background-color: #fffbe6; /* 浅黄色背景突出促销 */
+  border-radius: 10rpx;
+  border: 1rpx solid #ffe58f;
+}
+
+.promo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10rpx;
+}
+
+.promo-item.single {
+  border-right: 1rpx dashed #ff9900;
+}
+
+.promo-price-main {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ff5722; /* 抢眼的红色 */
+}
+.jiage-text {
+  /* 橙色 */
+  color: #ff8c00; 
+  
+  /* 居中 */
+  text-align: center; 
+  
+  /* 额外的样式，例如设置字体大小和加粗，让其更突出 */
+  font-size: 30rpx;
+  font-weight: bold;
+  display: block; /* 确保它能占据一行并应用 text-align: center */
+  margin: 10rpx 0; /* 上下留白 */
+}
+.promo-text {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 5rpx;
+}
+
+.promo-item.group {
+  justify-content: center;
+}
+
+.promo-text-group {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #4caf50; /* 绿色突出免费 */
+  padding: 10rpx;
+  border: 2rpx solid #4caf50;
+  border-radius: 8rpx;
+}
+/* ====== 试听促销模块样式 END ====== */
+
+/* 调整底部按钮颜色，使其与试听颜色区分 */
+.reserve-btn-detail {
+  background-color: #007bff; /* 使用蓝色作为正式预约色 */
+  color: #fff;
+  font-size: 30rpx;
+  padding: 15rpx 30rpx;
+  border-radius: 50rpx;
+  line-height: 1;
+  height: auto;
+  min-width: 250rpx;
+  margin: 0 auto; /* 居中 */
+  width: 90%;
+}

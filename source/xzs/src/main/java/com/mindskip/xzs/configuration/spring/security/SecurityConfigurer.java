@@ -86,6 +86,7 @@ public class SecurityConfigurer {
                     .antMatchers(securityIgnoreUrls.toArray(ignores)).permitAll()
                     .antMatchers("/api/student/profiles").permitAll()
                     .antMatchers("/api/student/profiles/**").permitAll()
+                    .antMatchers("/api/mail/**").permitAll()
                     .antMatchers("/api/admin/**").hasRole(RoleEnum.ADMIN.getName())
                     .antMatchers("/api/student/**").hasRole(RoleEnum.STUDENT.getName())
                     .anyRequest().permitAll()

@@ -1,0 +1,51 @@
+<view class="reserve-container">
+  
+  <view class="course-header">
+    <text class="course-name-display">预约课程：</text>
+    <text class="course-name-highlight">{{formData.courseName || '（未选择课程）'}}</text>
+  </view>
+
+  <form bindsubmit="submitForm">
+    
+    <view class="form-item">
+      <text class="item-label">联系人</text>
+      <input 
+        class="item-input" 
+        data-field="name" 
+        bindinput="handleInput" 
+        placeholder="请输入您的称呼" 
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="item-label required">手机号</text>
+      <input 
+        class="item-input" 
+        data-field="phone" 
+        bindinput="handleInput" 
+        placeholder="请输入手机号（必填）" 
+        type="number" 
+        maxlength="11"
+      />
+    </view>
+
+    <view class="form-item selector-item">
+      <text class="item-label required">预约时间</text>
+      <picker 
+        mode="selector" 
+        value="{{formData.reserveDateIndex}}" 
+        range="{{reserveOptions}}" 
+        range-key="display" 
+        bindchange="bindReserveChange"
+      >
+        <view class="picker-display">
+          {{formData.reserveDateTime || '点击选择周六/周日的开课时间（必选）'}}
+        </view>
+      </picker>
+    </view>
+    <button class="submit-btn" bindtap="submitForm">
+      确认预约并提交
+    </button>
+
+  </form>
+</view>

@@ -1,0 +1,78 @@
+.reserve-container {
+  padding: 40rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+/* 课程信息展示 */
+.course-header {
+  padding: 30rpx 0;
+  margin-bottom: 40rpx;
+  text-align: center;
+  border-bottom: 2rpx solid #eee;
+}
+.course-name-display {
+  font-size: 30rpx;
+  color: #666;
+}
+.course-name-highlight {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* 表单项通用样式 */
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+  background-color: #fff;
+}
+
+.item-label {
+  width: 180rpx;
+  font-size: 30rpx;
+  color: #333;
+  padding-left: 20rpx;
+}
+
+.required::after {
+  content: '*';
+  color: #e91e63;
+  margin-left: 5rpx;
+}
+
+.item-input {
+  flex: 1;
+  font-size: 30rpx;
+  padding-right: 20rpx;
+}
+
+/* 选择器特殊样式 */
+.selector-item {
+  background-color: #fff;
+}
+
+.picker-display {
+  flex: 1;
+  font-size: 30rpx;
+  color: #333;
+  padding-right: 20rpx;
+  text-align: right;
+}
+
+.picker-display:empty:before {
+  content: '点击选择（必选）';
+  color: #ccc;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  margin-top: 80rpx;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  letter-spacing: 5rpx;
+}

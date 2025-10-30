@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mindskip.xzs.repository.ReserveMapper">
+    <resultMap id="BaseResultMap" type="com.mindskip.xzs.viewmodel.Public.ReservationRequest">
+        <id column="id" property="id" />
+        <result column="course_id" property="courseId" />
+        <result column="course_name" property="courseName" />
+        <result column="name" property="name" />
+        <result column="phone" property="phone" />
+        <result column="appointment" property="appointment" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+    <select id="getReserveList"  resultMap="BaseResultMap">
+        select * from t_reservation
+    </select>
+    <delete id="deleteReserve" parameterType="java.lang.Integer">
+        delete from t_reservation where id = #{id}
+    </delete>
+    <insert id="insertReserve" parameterType="com.mindskip.xzs.viewmodel.Public.ReservationRequest">
+        insert into t_reservation (course_id, course_name, name, phone, appointment)
+        values (#{courseId}, #{courseName}, #{name}, #{phone}, #{appointment})
+    </insert>
+
+</mapper>

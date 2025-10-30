@@ -1,0 +1,58 @@
+<view class="container-split">
+  <scroll-view class="sidebar" scroll-y>
+    <block wx:for="{{courseList}}" wx:key="id">
+      <view 
+        class="sidebar-item {{item.id === activeId ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="toggleContent"
+      >
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view class="content-area">
+    <block wx:for="{{courseList}}" wx:key="id">
+        <view class="course-detail-card" wx:if="{{item.id === activeId}}">
+            
+            <view class="detail-header">
+                <text class="detail-name">{{item.name}}</text>
+                <text class="detail-age-tag">{{item.age}}</text>
+            </view>
+            <view class="detail-slogan">{{item.slogan}}</view>
+
+            <view class="detail-content-box">
+                <text class="content-text-detail">{{item.content}}</text>
+                <view class="class-size-detail">班级：{{item.size}}</view>
+            </view>
+            <view>
+    <text class="jiage-text">本期体验课价格限时优惠！</text>
+</view>
+            <view class="trial-promo-box">
+                <view class="promo-item single">
+                    <text class="promo-price-main">{{trialInfo.singlePrice}}</text>
+                    <text class="promo-text"></text>
+                </view>
+                <view class="promo-item group">
+                    <text class="promo-text-group">{{trialInfo.groupAction}}</text>
+                </view>
+            </view>
+            <view class="original-price-note">
+                <text>本期正课团购价：{{item.priceInfo.price}}</text>
+                <text class="original-price-detail-weak">（原价 {{item.priceInfo.originalPrice}}）</text>
+            </view>
+
+            <view class="detail-footer">
+                <button 
+                    class="reserve-btn-detail" 
+                    bindtap="onReserve" 
+                    data-id="{{item.id}}"
+                    data-name="{{item.name}}"
+                >
+                    {{item.action}}
+                </button>
+            </view>
+        </view>
+    </block>
+</view>
+</view>
