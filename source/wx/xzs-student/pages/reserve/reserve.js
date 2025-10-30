@@ -1,9 +1,7 @@
 Page({
   data: {
-    // ***** 注意: 将 localhost 替换为您的本地 IP 地址，因为小程序无法直接访问 localhost *****
-    // 如果在微信开发者工具中测试，使用 http://localhost:8888/ 即可。
-    // 如果在真机调试，请将 localhost 替换为电脑的局域网 IP (例如: http://192.168.1.xxx:8888)
-    BASE_URL: 'http://localhost:8888', 
+
+    BASE_URL: 'https://aikes.ltd', 
     
     // 表单数据
     formData: {
@@ -177,7 +175,7 @@ Page({
         wx.hideLoading();
         console.error('预约请求失败', err);
         wx.showToast({
-          title: '网络错误，请检查后端服务是否运行在 http://localhost:8888',
+          title: '网络错误，请检查后端服务是否运行在 https://aikes.ltd',
           icon: 'none',
           duration: 3000
         });

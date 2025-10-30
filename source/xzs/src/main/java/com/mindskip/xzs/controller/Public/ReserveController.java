@@ -69,7 +69,7 @@ public class ReserveController {
                 reservationRequest.getAppointment());
 
         // 假设通知邮件发送给管理员
-        mailUtil.sendSimpleMail("gl11223@qq.com", subject, content);
+        mailUtil.sendSimpleMail("410052065@qq.com", subject, content);
         System.out.println("管理员通知邮件发送成功");
 
         // 4. 返回成功响应（小程序需要 HTTP 200 状态码和 code=0 标记成功）
