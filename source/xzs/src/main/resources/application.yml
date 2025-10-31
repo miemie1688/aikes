@@ -82,3 +82,19 @@ spring:
   #runningtime environment
   profiles:
     active:  prod
+
+  mail:
+    host: smtp.qq.com           # QQ 邮箱 SMTP 服务器
+    port: 587                   # 端口 465(SSL) 或 587(TLS)
+    username: 3081914637@qq.com  # 发件人邮箱
+    password: hlwrovbeoiildedg           # 刚刚获取的授权码
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
