@@ -53,7 +53,7 @@ public class ReserveadminController {
                 reservationRequest.getAppointment());
 
         // 假设通知邮件发送给管理员410052065@qq.com
-        mailUtil.sendSimpleMail("gl11223@qq.com", subject, content);
+        mailUtil.sendSimpleMail("410052065@qq.com", subject, content);
         log.info("管理员通知邮件发送成功");
 
 
